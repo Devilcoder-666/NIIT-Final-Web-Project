@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://https://ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout}"
+>
+
+<div layout:fragment="content-wrapper">
+  <!--  <div class="content">-->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">User list</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a th:href="@{/admin/home/}">Home</a></li>
+                            <li class="breadcrumb-item active">User</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+
+    <div class="row">
+        <div class="col-12">
+          <!--  <div th:if="${failed!=null}" class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h5><i class="icon fas fa-ban"></i> Alert!</h5>
+                <div th:text="${failed}"></div>
+            </div>
+
+            <div th:if="${success!=null}" class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h5><i class="icon fas fa-check"></i> Alert!</h5>
+                <div th:text="${success}"></div>
+            </div>-->
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Bordered Table</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th style="width: 10px">ID</th>
+                            <th>Email</th>
+                            <th>Name</th>
+                            <th>Full Name</th>
+                            <th>Full Name</th>
+                            <th>Role</th>
+                            <th>Thao tác</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+
+                       <!-- <tr th:each="item:${listResult.getListUser()}">
+                            <td th:text="${item.getId()}"></td>
+                            <td th:text="${item.getEmail()}"></td>
+                            <td th:text="${item.getFullName()}"></td>
+                            <td>
+                                <div th:if="${item.role==2}">Admin</div>
+                                <div th:if="${item.role==1}">Client</div>
+                            </td>
+                            <td>
+                                <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete it ?')"
+                                   th:href="@{/admin/users/delete(id=${item.getId()})}">Delete</a>
+                                <a class="btn btn-warning" th:href="@{/admin/users/edit(id=${item.getId()})}">Edit</a>
+                            </td>
+                        </tr>-->
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- /.card-body -->
+              <!--  <div th:if="${listResult.getTotalPage()>1}" class="card-footer clearfix">
+                    <ul class="pagination pagination-sm m-0 float-right">
+                        <li th:each="pageNumber:${#numbers.sequence(1, listResult.getTotalPage())}"
+                            th:attr="class=${listResult.getActivePage()==pageNumber ? 'active page-item' : 'page-item'}">
+                            <a class="page-link" th:href="@{/admin/users(page=${pageNumber})}" th:text="${pageNumber}"></a>
+                        </li>
+                    </ul>
+                </div>-->
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+ <!--   </div>-->
+
+
+</div>
+
