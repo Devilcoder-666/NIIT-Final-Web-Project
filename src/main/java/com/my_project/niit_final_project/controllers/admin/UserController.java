@@ -43,13 +43,28 @@ public class UserController implements ICRUD<User>{
 
     @Override
     @GetMapping("/list")
-    public String list(Model model,@RequestParam(name="page", defaultValue = "0") int page) {
-        Page<User> listUserPage = userService.getPageUser(page);
+    public String list(Model model,@RequestParam(name="page", defaultValue = "0") int page,@RequestParam(name="activePage", defaultValue = "0") int activePage) {
+        int totalPage= userService.getPageUser(activePage).getTotalPages();
+       /* System.out.println("Gui len"+page);
+        System.out.println("Tong"+totalPage);
+        System.out.println("trang hien tai "+activePage);*/
+        if( page<0 || page>totalPage-1 ){
+          /*  System.out.println("Gui len sai"+page);
+            System.out.println("trang hien tai sai "+activePage);*/
+            Page<User> listUserPage = userService.getPageUser(activePage);
+            model.addAttribute("listUserPage",listUserPage);
+            model.addAttribute("activePage", activePage);
 
-        System.out.println(listUserPage.stream().iterator());
-        listUserPage.getTotalPages();
-        model.addAttribute("listUserPage",listUserPage);
-        model.addAttribute("activePage", page);
+
+        }else {
+           /* System.out.println("Gui len dung"+page);
+            System.out.println("trang hien tai dung "+activePage);*/
+            Page<User> listUserPage = userService.getPageUser(page);
+            model.addAttribute("listUserPage",listUserPage);
+            model.addAttribute("activePage", page);
+
+        }
+
         return "admin/user/list";
     }
 
@@ -57,16 +72,16 @@ public class UserController implements ICRUD<User>{
     @GetMapping("/delete")
     public String delete(@RequestParam(name = "id") long id, RedirectAttributes flashSession){
         if (userService.delete(id)) {
-            flashSession.addFlashAttribute("success", "Đã xóa người dùng ");
+            flashSession.addFlashAttribute("success", "Success!");
         } else {
-            flashSession.addFlashAttribute("failed", "Xóa người dùng thất bại");
+            flashSession.addFlashAttribute("failed", "Failed!");
         }
         return "redirect:/admin/user/list";
     }
 
     @Override
     @GetMapping ("/edit")
-    public String edit(Model model, long id) {
+    public String edit(Model model, @RequestParam(name = "id") long id) {
         User user= userService.getUserById(id);
         model.addAttribute("user",user);
         return "admin/user/edit";
@@ -76,9 +91,9 @@ public class UserController implements ICRUD<User>{
     @PostMapping ("/do-edit")
     public String doEdit(User user, RedirectAttributes flashSession) {
         if (userService.save(user)) {
-            flashSession.addFlashAttribute("success", "Đã xóa người dùng ");
+            flashSession.addFlashAttribute("success", "Success!");
         } else {
-            flashSession.addFlashAttribute("failed", "Xóa người dùng thất bại");
+            flashSession.addFlashAttribute("failed", "Failed!");
         }
         return "redirect:/admin/user/list";
     }

@@ -28,7 +28,7 @@ public class OrderProduct {
     Long orderId;
 
     @Column(name = "product_id")
-    Long productid;
+    Long productId;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "order_id", insertable = false,updatable = false)

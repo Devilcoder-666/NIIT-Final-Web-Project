@@ -26,7 +26,7 @@ public class OrderController implements ICRUD<Order> {
     }
 
     @Override
-    public String list(Model model, int page) {
+    public String list(Model model, int page, int activePage) {
         return null;
     }
 

@@ -3,6 +3,7 @@ package com.my_project.niit_final_project.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Entity
@@ -17,7 +18,7 @@ public class Order {
     Double total;
 
     @Column(name = "order_date")
-    String orderDate;
+    LocalDateTime orderDate;
 
     @Column(name = "received_address")
     String receivedAddress;

@@ -26,11 +26,11 @@ public class ProductTypeController implements ICRUD<ProductType>{
         return null;
     }
 
+
     @Override
-    public String list(Model model, int page) {
+    public String list(Model model, int page, int activePage) {
         return null;
     }
-
     @Override
     public String delete(long id, RedirectAttributes flashSession) {
         return null;

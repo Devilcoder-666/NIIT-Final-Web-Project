@@ -3,6 +3,7 @@ package com.my_project.niit_final_project.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -27,10 +28,8 @@ public class Product {
     @Column(name = "discount")
     Double discount;
 
-
     @Column(name = "status")
     Integer status;
-
 
     @Column(name = "picture",length = 1000)
     String picture;
@@ -41,4 +40,6 @@ public class Product {
     @ManyToOne()
     @JoinColumn(name = "category_id", insertable = false, updatable = false)
     Category category;
+    @Column(name ="created_date",nullable = false)
+    LocalDateTime createdDate;
 }

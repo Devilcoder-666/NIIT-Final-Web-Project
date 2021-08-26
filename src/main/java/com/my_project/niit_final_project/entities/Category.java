@@ -3,6 +3,7 @@ package com.my_project.niit_final_project.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Entity
@@ -30,4 +31,6 @@ public class Category {
 
     @OneToMany(mappedBy="category",fetch = FetchType.LAZY)
     Collection<Product> products;
+    @Column(name ="created_date",nullable = false)
+    LocalDateTime createdDate;
 }

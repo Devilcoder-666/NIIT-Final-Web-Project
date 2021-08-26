@@ -11,7 +11,7 @@ public interface ICRUD <Obj>{
     public String doAdd(Obj obj, RedirectAttributes flashSession);
     public String doAddWithImage(Obj obj, RedirectAttributes flashSession,
                         @RequestParam(name = "img") MultipartFile multipartFile);
-    public String list(Model model, @RequestParam(name = "page", defaultValue = "1") int page);
+    public String list(Model model, @RequestParam(name = "page", defaultValue = "1") int page,@RequestParam(name="activePage", defaultValue = "0") int activePage);
 
     public String delete(@RequestParam(name = "id") long id, RedirectAttributes flashSession);
 

@@ -4,6 +4,7 @@ import lombok.Data;
 
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Entity
@@ -23,4 +24,6 @@ public class ProductType {
 
     @OneToMany(mappedBy="productType",fetch = FetchType.LAZY)
     Collection<Category> categories;
+    @Column(name ="created_date",nullable = false)
+    LocalDateTime createdDate;
 }
