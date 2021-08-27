@@ -59,7 +59,6 @@
                         <tr th:each="type:${listProductTypePage.iterator()}">
                             <td th:text="${type.getId()}"></td>
                             <td th:text="${type.getName()}"></td>
-
                             <td>
                                 <div th:if="${type.status==0}">Inactive</div>
                                 <div th:if="${type.status==1}">Active</div>

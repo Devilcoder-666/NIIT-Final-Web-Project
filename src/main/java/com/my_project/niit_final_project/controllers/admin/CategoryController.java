@@ -27,8 +27,9 @@ public class CategoryController implements ICRUD<Category>{
     public String add(Model model) {
         Category category = new Category();
         Iterable<ProductType> typeList= productTypeService.getAll();
-        model.addAttribute("category", category);
+
         model.addAttribute("typeList",typeList);
+        model.addAttribute("category", category);
         return "admin/category/add";
     }
     @PostMapping("/do-add")
@@ -50,6 +51,8 @@ public class CategoryController implements ICRUD<Category>{
     @GetMapping("/list")
     public String list(Model model, @RequestParam(name="page", defaultValue = "0") int page, @RequestParam(name="activePage", defaultValue = "0") int activePage) {
         int totalPage= categoryService.getPageCategory(activePage).getTotalPages();
+         Iterable<ProductType> typeList =  productTypeService.getAll();
+
        /* System.out.println("Gui len"+page);
         System.out.println("Tong"+totalPage);
         System.out.println("trang hien tai "+activePage);*/
@@ -59,6 +62,7 @@ public class CategoryController implements ICRUD<Category>{
             Page<Category> listCategoryPage = categoryService.getPageCategory(activePage);
             model.addAttribute("listCategoryPage",listCategoryPage);
             model.addAttribute("activePage", activePage);
+            model.addAttribute("typeList",typeList);
 
 
         }else {
@@ -88,6 +92,9 @@ public class CategoryController implements ICRUD<Category>{
     @GetMapping ("/edit")
     public String edit(Model model, @RequestParam(name = "id") long id) {
         Category category= categoryService.getCategoryById(id);
+        Iterable<ProductType> typeList= productTypeService.getAll();
+
+        model.addAttribute("typeList",typeList);
         model.addAttribute("category",category);
         return "admin/category/edit";
     }
