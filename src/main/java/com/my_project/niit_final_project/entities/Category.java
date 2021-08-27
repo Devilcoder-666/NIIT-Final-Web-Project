@@ -18,7 +18,7 @@ public class Category {
     String name;
 
     @Column(name = "status")
-    Long status;
+    Integer status;
 
     @Column(name = "product_type_id")
     Long typeId;

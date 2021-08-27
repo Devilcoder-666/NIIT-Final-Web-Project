@@ -27,6 +27,7 @@ public class User implements Serializable {
     String address;
     @Column(name ="created_date",nullable = false)
     LocalDateTime createdDate;
+
     @Column(name="role",nullable = false)
     Integer role;
 }

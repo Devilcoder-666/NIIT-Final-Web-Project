@@ -20,7 +20,7 @@ public class ProductType {
     String name;
 
     @Column(name = "status")
-    Long status;
+    Integer status;
 
     @OneToMany(mappedBy="productType",fetch = FetchType.LAZY)
     Collection<Category> categories;

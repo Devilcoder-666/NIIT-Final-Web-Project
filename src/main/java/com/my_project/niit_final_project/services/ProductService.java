@@ -11,4 +11,10 @@ public class ProductService {
     public  Long countTotal(){
         return productRepository.count();
     }
+
+
+
+
+
+
 }
