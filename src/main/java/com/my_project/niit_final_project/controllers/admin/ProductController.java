@@ -80,13 +80,14 @@ public class ProductController implements ICRUD<Product> {
         } else {
            /* System.out.println("Gui len dung"+page);
             System.out.println("trang hien tai dung "+activePage);*/
-            Page<Category> listCategoryPage = categoryService.getPageCategory(page);
-            model.addAttribute("listCategoryPage", listCategoryPage);
+            Page<Product> listProductPage = productService.getPageProduct(page);
+            model.addAttribute("listProductPage", listProductPage);
             model.addAttribute("activePage", page);
+            model.addAttribute("categoryList", categoryList);
 
         }
 
-        return "admin/category/list";
+        return "admin/product/list";
     }
 
     @Override
