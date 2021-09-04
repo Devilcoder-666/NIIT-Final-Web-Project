@@ -61,19 +61,24 @@ public class ProductService {
         return productRepository.findById(id).get();
     }
 
-    public Page<Product> getPageProduct(int page) {
-        Pageable pageable = PageRequest.of(page, 10);
+    public Page<Product> getPageProduct(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
         return productRepository.findAll(pageable);
     }
 
-    public Page<Product> getPageSaleProduct(int page) {
-        Pageable pageable = PageRequest.of(page, 4, Sort.by("discount").descending());
+    public Page<Product> getPageSaleProduct(int page,int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("discount").descending());
         return productRepository.findAll(pageable);
     }
 
-    public Page<Product> getPageNewProduct(int page) {
-        Pageable pageable = PageRequest.of(page, 4, Sort.by("id").descending());
+    public Page<Product> getPageNewProduct(int page,int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
         return productRepository.findAll(pageable);
+    }
+    public Page<Product> getPageProductByCategoryId(int page,int size,long id){
+        Pageable pageable= PageRequest.of(page, size);
+      Page<Product> pageProduct= productRepository.findByCategoryId(id,pageable);
+      return pageProduct;
     }
 
 

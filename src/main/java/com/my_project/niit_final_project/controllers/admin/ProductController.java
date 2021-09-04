@@ -62,7 +62,7 @@ public class ProductController implements ICRUD<Product> {
     @Override
     @GetMapping("/list")
     public String list(Model model, @RequestParam(name = "page", defaultValue = "0") int page, @RequestParam(name = "activePage", defaultValue = "0") int activePage) {
-        int totalPage = productService.getPageProduct(activePage).getTotalPages();
+        int totalPage = productService.getPageProduct(activePage,10).getTotalPages();
         Iterable<Category> categoryList = categoryService.getAll();
 
        /* System.out.println("Gui len"+page);
@@ -71,7 +71,7 @@ public class ProductController implements ICRUD<Product> {
         if (page < 0 || page > totalPage - 1) {
           /*  System.out.println("Gui len sai"+page);
             System.out.println("trang hien tai sai "+activePage);*/
-            Page<Product> listProductPage = productService.getPageProduct(activePage);
+            Page<Product> listProductPage = productService.getPageProduct(activePage,10);
             model.addAttribute("listProductPage", listProductPage);
             model.addAttribute("activePage", activePage);
             model.addAttribute("categoryList", categoryList);
@@ -80,7 +80,7 @@ public class ProductController implements ICRUD<Product> {
         } else {
            /* System.out.println("Gui len dung"+page);
             System.out.println("trang hien tai dung "+activePage);*/
-            Page<Product> listProductPage = productService.getPageProduct(page);
+            Page<Product> listProductPage = productService.getPageProduct(page,10);
             model.addAttribute("listProductPage", listProductPage);
             model.addAttribute("activePage", page);
             model.addAttribute("categoryList", categoryList);

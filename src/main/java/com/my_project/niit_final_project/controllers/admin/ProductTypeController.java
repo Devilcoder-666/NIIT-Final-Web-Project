@@ -44,14 +44,14 @@ public class ProductTypeController implements ICRUD<ProductType>{
     @Override
     @GetMapping("/list")
     public String list(Model model, @RequestParam(name="page", defaultValue = "0") int page, @RequestParam(name="activePage", defaultValue = "0") int activePage) {
-        int totalPage= productTypeService.getPageProductType(activePage).getTotalPages();
+        int totalPage= productTypeService.getPageProductType(activePage,10).getTotalPages();
        /* System.out.println("Gui len"+page);
         System.out.println("Tong"+totalPage);
         System.out.println("trang hien tai "+activePage);*/
         if( page<0 || page>totalPage-1 ){
           /*  System.out.println("Gui len sai"+page);
             System.out.println("trang hien tai sai "+activePage);*/
-            Page<ProductType> listProductTypePage = productTypeService.getPageProductType(activePage);
+            Page<ProductType> listProductTypePage = productTypeService.getPageProductType(activePage,10);
             model.addAttribute("listProductTypePage",listProductTypePage);
             model.addAttribute("activePage", activePage);
 
@@ -59,7 +59,7 @@ public class ProductTypeController implements ICRUD<ProductType>{
         }else {
            /* System.out.println("Gui len dung"+page);
             System.out.println("trang hien tai dung "+activePage);*/
-            Page<ProductType> listProductTypePage = productTypeService.getPageProductType(page);
+            Page<ProductType> listProductTypePage = productTypeService.getPageProductType(page,10);
             model.addAttribute("listProductTypePage",listProductTypePage);
             model.addAttribute("activePage", page);
 

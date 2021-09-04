@@ -44,8 +44,8 @@ public class CategoryService {
         return categoryRepository.findById(id).get();
     }
 
-    public Page<Category> getPageCategory(int page ){
-        Pageable pageable=  PageRequest.of(page,20);
+    public Page<Category> getPageCategory(int page ,int size){
+        Pageable pageable=  PageRequest.of(page,size);
         return categoryRepository.findAll(pageable);
     }
     public  Iterable<Category> getAll(){

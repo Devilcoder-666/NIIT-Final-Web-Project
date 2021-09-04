@@ -46,8 +46,8 @@ public class ProductTypeService {
         return productTypeRepository.findById(id).get();
     }
 
-    public Page<ProductType> getPageProductType(int page ){
-        Pageable pageable=  PageRequest.of(page,10);
+    public Page<ProductType> getPageProductType(int page,int size ){
+        Pageable pageable=  PageRequest.of(page,size);
         return productTypeRepository.findAll(pageable);
     }
     public  Iterable<ProductType> getAll(){

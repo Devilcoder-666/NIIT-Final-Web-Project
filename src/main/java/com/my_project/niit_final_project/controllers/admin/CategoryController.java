@@ -50,7 +50,7 @@ public class CategoryController implements ICRUD<Category>{
     @Override
     @GetMapping("/list")
     public String list(Model model, @RequestParam(name="page", defaultValue = "0") int page, @RequestParam(name="activePage", defaultValue = "0") int activePage) {
-        int totalPage= categoryService.getPageCategory(activePage).getTotalPages();
+        int totalPage= categoryService.getPageCategory(activePage,20).getTotalPages();
          Iterable<ProductType> typeList =  productTypeService.getAll();
 
        /* System.out.println("Gui len"+page);
@@ -59,7 +59,7 @@ public class CategoryController implements ICRUD<Category>{
         if( page<0 || page>totalPage-1 ){
           /*  System.out.println("Gui len sai"+page);
             System.out.println("trang hien tai sai "+activePage);*/
-            Page<Category> listCategoryPage = categoryService.getPageCategory(activePage);
+            Page<Category> listCategoryPage = categoryService.getPageCategory(activePage,20);
             model.addAttribute("listCategoryPage",listCategoryPage);
             model.addAttribute("activePage", activePage);
             model.addAttribute("typeList",typeList);
@@ -68,9 +68,10 @@ public class CategoryController implements ICRUD<Category>{
         }else {
            /* System.out.println("Gui len dung"+page);
             System.out.println("trang hien tai dung "+activePage);*/
-            Page<Category> listCategoryPage = categoryService.getPageCategory(page);
+            Page<Category> listCategoryPage = categoryService.getPageCategory(page,20);
             model.addAttribute("listCategoryPage",listCategoryPage);
             model.addAttribute("activePage", page);
+            model.addAttribute("typeList",typeList);
 
         }
 
