@@ -10,4 +10,5 @@ public class CartProduct implements Serializable {
     String name;
     Double price;
     int quantity;
+    String picture;
 }

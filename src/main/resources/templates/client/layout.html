@@ -1,10 +1,11 @@
-
 <!DOCTYPE html>
-<html class="js sizes customelements history postmessage websockets picture webworkers pointerevents webgl srcset cssanimations csscolumns csscolumns-width csscolumns-span csscolumns-fill csscolumns-gap csscolumns-rule csscolumns-rulecolor csscolumns-rulestyle csscolumns-rulewidth csscolumns-breakbefore csscolumns-breakafter csscolumns-breakinside flexbox" lang="en"
+<html class="js sizes customelements history postmessage websockets picture webworkers pointerevents webgl srcset cssanimations csscolumns csscolumns-width csscolumns-span csscolumns-fill csscolumns-gap csscolumns-rule csscolumns-rulecolor csscolumns-rulestyle csscolumns-rulewidth csscolumns-breakbefore csscolumns-breakafter csscolumns-breakinside flexbox"
+      lang="en"
       xmlns:th="http://thymeleaf.org" xmlns:layout="http://https://ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+    <!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -56,16 +57,19 @@
 
                         <label for="main-search"></label>
 
-                        <input class="input-text input-text--border-radius input-text--style-1" type="text" id="main-search" placeholder="Search">
+                        <input class="input-text input-text--border-radius input-text--style-1" type="text"
+                               id="main-search" placeholder="Search">
 
-                        <button class="btn btn--icon fas fa-search main-search-button" type="submit"></button></form>
+                        <button class="btn btn--icon fas fa-search main-search-button" type="submit"></button>
+                    </form>
                     <!--====== End - Search Form ======-->
 
 
                     <!--====== Dropdown Main plugin ======-->
                     <div class="menu-init" id="navigation">
 
-                        <button class="btn btn--icon toggle-button toggle-button--secondary fas fa-cogs" type="button"></button>
+                        <button class="btn btn--icon toggle-button toggle-button--secondary fas fa-cogs"
+                                type="button"></button>
 
                         <!--====== Menu ======-->
                         <div class="ah-lg-mode">
@@ -74,7 +78,8 @@
 
                             <!--====== List ======-->
                             <ul class="ah-list ah-list--design1 ah-list--link-color-secondary">
-                                <li class="has-dropdown" data-tooltip="tooltip" data-placement="left" title="" data-original-title="Account">
+                                <li class="has-dropdown" data-tooltip="tooltip" data-placement="left" title=""
+                                    data-original-title="Account">
 
                                     <a><i class="far fa-user-circle"></i></a>
 
@@ -147,7 +152,8 @@
                     <!--====== Dropdown Main plugin ======-->
                     <div class="menu-init" id="navigation2">
 
-                        <button class="btn btn--icon toggle-button toggle-button--secondary fas fa-cog" type="button"></button>
+                        <button class="btn btn--icon toggle-button toggle-button--secondary fas fa-bars"
+                                type="button"></button>
 
                         <!--====== Menu ======-->
                         <div class="ah-lg-mode">
@@ -160,9 +166,10 @@
                                     <a href="shop-side-version-2.html">ALL PRODUCTS</a>
                                 </li>
 
-                                <li class="has-dropdown"  th:if="${type.getCategories().size()>0}" th:each="type:${listProductType}">
+                                <li class="has-dropdown" th:if="${type.getCategories().size()>0}"
+                                    th:each="type:${listProductType}">
 
-                                    <a th:text="${type.getName()}" >   <i class="fas fa-angle-down u-s-m-l-6"></i>   </a>
+                                    <a th:text="${type.getName()}"> <i class="fas fa-angle-down u-s-m-l-6"></i> </a>
 
                                     <!--====== Dropdown ======-->
 
@@ -171,18 +178,19 @@
 
                                         <li th:each="category:${type.getCategories().iterator()}">
 
-                                            <a th:href="@{/client/category/product(id=${category.getId()})}" th:text="${category.getName()}">404</a>
+                                            <a th:href="@{/client/category/product(id=${category.getId()})}"
+                                               th:text="${category.getName()}">404</a>
 
                                         </li>
                                     </ul>
                                     <!--====== End - Dropdown ======-->
-                                </li >
+                                </li>
 
 
-                               <!-- <li th:each="type:${listProductType}" th:if="${type.getCategories().size()==0}" th:text="${type.getName()}" >
+                                <!-- <li th:each="type:${listProductType}" th:if="${type.getCategories().size()==0}" th:text="${type.getName()}" >
 
-                                    <a href="shop-side-version-2.html" >VALUE OF THE DAY</a>
-                                </li>-->
+                                     <a href="shop-side-version-2.html" >VALUE OF THE DAY</a>
+                                 </li>-->
 
 
                             </ul>
@@ -196,9 +204,10 @@
                     <!--====== Dropdown Main plugin ======-->
                     <div class="menu-init" id="navigation3">
 
-                        <button class="btn btn--icon toggle-button toggle-button--secondary fas fa-shopping-bag toggle-button-shop" type="button"></button>
+                        <button class="btn btn--icon toggle-button toggle-button--secondary fas fa-shopping-bag toggle-button-shop"
+                                type="button"></button>
 
-                        <span class="total-item-round">2</span>
+                        <span class="total-item-round"></span>
 
                         <!--====== Menu ======-->
                         <div class="ah-lg-mode">
@@ -228,114 +237,22 @@
                                         <div class="mini-product-container gl-scroll u-s-m-b-15">
 
                                             <!--====== Card for mini cart ======-->
-                                            <div class="card-mini-product">
-                                                <div class="mini-product">
-                                                    <div class="mini-product__image-wrapper">
 
-                                                        <a class="mini-product__link" href="product-detail.html">
+                                            <!--====== End - Card for mini cart ======-->
+                                            <!--   th:attr="onclick=|deleteProduct('${cartProduct.getId()}')|"-->
 
-                                                            <img class="u-img-fluid" th:src="@{/client/images/product/electronic/product3.jpg}" alt=""></a></div>
-                                                    <div class="mini-product__info-wrapper">
+                                            <!--====== Card for mini cart ======-->
 
-                                                            <span class="mini-product__category">
-
-                                                                <a href="shop-side-version-2.html">Electronics</a></span>
-
-                                                        <span class="mini-product__name">
-
-                                                                <a href="product-detail.html">Yellow Wireless Headphone</a></span>
-
-                                                        <span class="mini-product__quantity">1 x</span>
-
-                                                        <span class="mini-product__price">$8</span></div>
-                                                </div>
-
-                                                <a class="mini-product__delete-link far fa-trash-alt"></a>
-                                            </div>
                                             <!--====== End - Card for mini cart ======-->
 
 
                                             <!--====== Card for mini cart ======-->
-                                            <div class="card-mini-product">
-                                                <div class="mini-product">
-                                                    <div class="mini-product__image-wrapper">
 
-                                                        <a class="mini-product__link" href="product-detail.html">
-
-                                                            <img class="u-img-fluid" th:src="@{/client/images/product/electronic/product18.jpg}" alt=""></a></div>
-                                                    <div class="mini-product__info-wrapper">
-
-                                                            <span class="mini-product__category">
-
-                                                                <a href="shop-side-version-2.html">Electronics</a></span>
-
-                                                        <span class="mini-product__name">
-
-                                                                <a href="product-detail.html">Nikon DSLR Camera 4k</a></span>
-
-                                                        <span class="mini-product__quantity">1 x</span>
-
-                                                        <span class="mini-product__price">$8</span></div>
-                                                </div>
-
-                                                <a class="mini-product__delete-link far fa-trash-alt"></a>
-                                            </div>
                                             <!--====== End - Card for mini cart ======-->
 
 
                                             <!--====== Card for mini cart ======-->
-                                            <div class="card-mini-product">
-                                                <div class="mini-product">
-                                                    <div class="mini-product__image-wrapper">
 
-                                                        <a class="mini-product__link" href="product-detail.html">
-
-                                                            <img class="u-img-fluid" th:src="@{/client/images/product/women/product8.jpg}" alt=""></a></div>
-                                                    <div class="mini-product__info-wrapper">
-
-                                                            <span class="mini-product__category">
-
-                                                                <a href="shop-side-version-2.html">Women Clothing</a></span>
-
-                                                        <span class="mini-product__name">
-
-                                                                <a href="product-detail.html">New Dress D Nice Elegant</a></span>
-
-                                                        <span class="mini-product__quantity">1 x</span>
-
-                                                        <span class="mini-product__price">$8</span></div>
-                                                </div>
-
-                                                <a class="mini-product__delete-link far fa-trash-alt"></a>
-                                            </div>
-                                            <!--====== End - Card for mini cart ======-->
-
-
-                                            <!--====== Card for mini cart ======-->
-                                            <div class="card-mini-product">
-                                                <div class="mini-product">
-                                                    <div class="mini-product__image-wrapper">
-
-                                                        <a class="mini-product__link" href="product-detail.html">
-
-                                                            <img class="u-img-fluid" th:src="@{/client/images/product/men/product8.jpg}" alt=""></a></div>
-                                                    <div class="mini-product__info-wrapper">
-
-                                                            <span class="mini-product__category">
-
-                                                                <a href="shop-side-version-2.html">Men Clothing</a></span>
-
-                                                        <span class="mini-product__name">
-
-                                                                <a href="product-detail.html">New Fashion D Nice Elegant</a></span>
-
-                                                        <span class="mini-product__quantity">1 x</span>
-
-                                                        <span class="mini-product__price">$8</span></div>
-                                                </div>
-
-                                                <a class="mini-product__delete-link far fa-trash-alt"></a>
-                                            </div>
                                             <!--====== End - Card for mini cart ======-->
                                         </div>
                                         <!--====== End - Mini Product Container ======-->
@@ -350,9 +267,11 @@
                                                 <span class="subtotal-value">$16</span></div>
                                             <div class="mini-action">
 
-                                                <a class="mini-link btn--e-brand-b-2" href="checkout.html">PROCEED TO CHECKOUT</a>
+                                                <a class="mini-link btn--e-brand-b-2" href="checkout.html">PROCEED TO
+                                                    CHECKOUT</a>
 
-                                                <a class="mini-link btn--e-transparent-secondary-b-2" href="cart.html">VIEW CART</a></div>
+                                                <a class="mini-link btn--e-transparent-secondary-b-2" href="cart.html">VIEW
+                                                    CART</a></div>
                                         </div>
                                         <!--====== End - Mini Product Statistics ======-->
                                     </div>
@@ -471,13 +390,16 @@
                                         <a class="s-tw--color-hover" href="#"><i class="fab fa-twitter"></i></a></li>
                                     <li>
 
-                                        <a class="s-youtube--color-hover" href="#"><i class="fab fa-youtube"></i></a></li>
+                                        <a class="s-youtube--color-hover" href="#"><i class="fab fa-youtube"></i></a>
+                                    </li>
                                     <li>
 
-                                        <a class="s-insta--color-hover" href="#"><i class="fab fa-instagram"></i></a></li>
+                                        <a class="s-insta--color-hover" href="#"><i class="fab fa-instagram"></i></a>
+                                    </li>
                                     <li>
 
-                                        <a class="s-gplus--color-hover" href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                        <a class="s-gplus--color-hover" href="#"><i
+                                                class="fab fa-google-plus-g"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -561,9 +483,11 @@
 
                                     <label for="newsletter"></label>
 
-                                    <input class="input-text input-text--only-white" type="text" id="newsletter" placeholder="Enter your Email">
+                                    <input class="input-text input-text--only-white" type="text" id="newsletter"
+                                           placeholder="Enter your Email">
 
-                                    <button class="btn btn--e-brand newsletter__btn" type="submit">SUBSCRIBE</button></div>
+                                    <button class="btn btn--e-brand newsletter__btn" type="submit">SUBSCRIBE</button>
+                                </div>
 
                                 <span class="newsletter__text">Subscribe to the mailing list to receive updates on promotions, new arrivals, discount and coupons.</span>
                             </form>
@@ -650,10 +574,14 @@
 
                                         <span class="pd-detail__price">$6.99</span>
 
-                                        <span class="pd-detail__discount">(76% OFF)</span><del class="pd-detail__del">$28.97</del></div>
+                                        <span class="pd-detail__discount">(76% OFF)</span>
+                                        <del class="pd-detail__del">$28.97</del>
+                                    </div>
                                 </div>
                                 <div class="u-s-m-b-15">
-                                    <div class="pd-detail__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                    <div class="pd-detail__rating gl-rating-style"><i class="fas fa-star"></i><i
+                                            class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                            class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
 
                                         <span class="pd-detail__review u-s-m-l-4">
 
@@ -668,7 +596,8 @@
                                 </div>
                                 <div class="u-s-m-b-15">
 
-                                    <span class="pd-detail__preview-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></div>
+                                    <span class="pd-detail__preview-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span>
+                                </div>
                                 <div class="u-s-m-b-15">
                                     <div class="pd-detail__inline">
 
@@ -681,7 +610,8 @@
                                 <div class="u-s-m-b-15">
                                     <div class="pd-detail__inline">
 
-                                            <span class="pd-detail__click-wrap"><i class="far fa-envelope u-s-m-r-6"></i>
+                                            <span class="pd-detail__click-wrap"><i
+                                                    class="far fa-envelope u-s-m-r-6"></i>
 
                                                 <a href="signin.html">Email me When the price drops</a>
 
@@ -691,19 +621,24 @@
                                     <ul class="pd-social-list">
                                         <li>
 
-                                            <a class="s-fb--color-hover" href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                            <a class="s-fb--color-hover" href="#"><i class="fab fa-facebook-f"></i></a>
+                                        </li>
                                         <li>
 
-                                            <a class="s-tw--color-hover" href="#"><i class="fab fa-twitter"></i></a></li>
+                                            <a class="s-tw--color-hover" href="#"><i class="fab fa-twitter"></i></a>
+                                        </li>
                                         <li>
 
-                                            <a class="s-insta--color-hover" href="#"><i class="fab fa-instagram"></i></a></li>
+                                            <a class="s-insta--color-hover" href="#"><i
+                                                    class="fab fa-instagram"></i></a></li>
                                         <li>
 
-                                            <a class="s-wa--color-hover" href="#"><i class="fab fa-whatsapp"></i></a></li>
+                                            <a class="s-wa--color-hover" href="#"><i class="fab fa-whatsapp"></i></a>
+                                        </li>
                                         <li>
 
-                                            <a class="s-gplus--color-hover" href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                            <a class="s-gplus--color-hover" href="#"><i
+                                                    class="fab fa-google-plus-g"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="u-s-m-b-15">
@@ -716,14 +651,16 @@
 
                                                     <span class="input-counter__minus fas fa-minus"></span>
 
-                                                    <input class="input-counter__text input-counter--text-primary-style" type="text" value="1" data-min="1" data-max="1000">
+                                                    <input class="input-counter__text input-counter--text-primary-style"
+                                                           type="text" value="1" data-min="1" data-max="1000">
 
                                                     <span class="input-counter__plus fas fa-plus"></span></div>
                                                 <!--====== End - Input Counter ======-->
                                             </div>
                                             <div class="u-s-m-b-15">
 
-                                                <button class="btn btn--e-brand-b-2" type="submit">Add to Cart</button></div>
+                                                <button class="btn btn--e-brand-b-2" type="submit">Add to Cart</button>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -768,7 +705,8 @@
                                     <span>Item is added successfully!</span></div>
                                 <div class="success__img-wrap">
 
-                                    <img class="u-img-fluid" th:src="@{/client/images/product/electronic/product1.jpg}" alt=""></div>
+                                    <img class="u-img-fluid" th:src="@{/client/images/product/electronic/product1.jpg}"
+                                         alt=""></div>
                                 <div class="success__info-wrap">
 
                                     <span class="success__name">Beats Bomb Wireless Headphone</span>
@@ -784,11 +722,13 @@
                                 <span class="s-option__text">1 item (s) in your cart</span>
                                 <div class="s-option__link-box">
 
-                                    <a class="s-option__link btn--e-white-brand-shadow" data-dismiss="modal">CONTINUE SHOPPING</a>
+                                    <a class="s-option__link btn--e-white-brand-shadow" data-dismiss="modal">CONTINUE
+                                        SHOPPING</a>
 
                                     <a class="s-option__link btn--e-white-brand-shadow" href="cart.html">VIEW CART</a>
 
-                                    <a class="s-option__link btn--e-brand-shadow" href="checkout.html">PROCEED TO CHECKOUT</a></div>
+                                    <a class="s-option__link btn--e-brand-shadow" href="checkout.html">PROCEED TO
+                                        CHECKOUT</a></div>
                             </div>
                         </div>
                     </div>
@@ -809,7 +749,7 @@
 
 <!--====== Google Analytics: change UA-XXXXX-Y to be your site's ID ======-->
 <script>
-    window.ga = function() {
+    window.ga = function () {
         ga.q.push(arguments)
     };
     ga.q = [];
@@ -826,7 +766,124 @@
 <script th:src="@{/client/js/jquery.shopnav.js}"></script>
 
 <!--====== App ======-->
-<script th:src="@{/client/js/app.js}"></script><a id="topScroll" href="#top" style="position: fixed; z-index: 100; display: none;"><i class="fas fa-long-arrow-alt-up"></i></a>
+<script th:src="@{/client/js/app.js}"></script>
+<a id="topScroll" href="#top" style="position: fixed; z-index: 100; display: none;"><i
+        class="fas fa-long-arrow-alt-up"></i></a>
+<script type="text/javascript">
+
+
+    $.ajax({
+        url: "/client/cart/get-total-cart-items",
+        dataType: 'json',
+        method: 'get',
+        success: function (resp) {
+            const totalCartItems = resp.total_cart_items;
+            $('.total-item-round').text(totalCartItems);
+        },
+        error: function (err) {
+            console.log(err)
+        },
+
+    })
+
+
+    function renderMiniProductUI(product) {
+
+        $('.mini-product-container').append(
+            `
+
+
+     <div class="card-mini-product"  >
+            <div class="mini-product">
+
+                                            <div class="mini-product__image-wrapper">
+
+                                                        <a class="mini-product__link" href="product-detail.html">
+
+                                                            <img class="u-img-fluid" alt="" src="/uploads/${product.picture}" ></a></div>
+                                                    <div class="mini-product__info-wrapper">
+
+
+
+                                                        <span class="mini-product__name">
+
+                                                                <a href="product-detail.html"  >${product.name} </a></span>
+
+                                                        <span class="mini-product__quantity">${product.quantity} X</span>
+
+                                                        <span class="mini-product__price">$ ${product.price}</span></div>
+                                                </div>
+
+              <a class="mini-product__delete-link far fa-trash-alt" onclick="deleteProduct(${product.id})" > </a>
+
+
+
+                                            </div>
+
+     `
+        )
+    }
+
+    function renderMiniCartUI(resp) {
+        let total = 0;
+        let totalProduct=resp.length;
+        for (let i = 0; i < resp.length; i++) {
+            const product = resp[i];
+            renderMiniProductUI(product);
+            total = total + (product.quantity * product.price);
+        }
+        $('.subtotal-value').html(total);
+        $('.total-item-round').html(totalProduct);
+    }
+
+
+    function loadCart() {
+        $.ajax({
+            url: "/client/cart/get-mini-cart",
+            dataType: "json",
+            method: 'get',
+            success: function (resp) {
+
+                renderMiniCartUI(resp);
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+    }
+
+    loadCart();
+
+
+    function deleteProduct(id) {
+
+        //gửi dữ liệu lên server
+        $.ajax({
+            url: "/client/cart/mini-cart/product/delete",
+            dataType: 'json',
+            method: 'post',
+            data: {
+                id: id,
+
+            },
+            success: function (resp) {
+
+                $('.mini-product-container').empty();
+                loadCart();
+                let total = resp.size();
+
+
+
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+
+    }
+
+
+</script>
 
 <!--====== Noscript ======-->
 <noscript>
@@ -845,4 +902,5 @@
     </div>
 </noscript>
 
-</body></html>
+</body>
+</html>

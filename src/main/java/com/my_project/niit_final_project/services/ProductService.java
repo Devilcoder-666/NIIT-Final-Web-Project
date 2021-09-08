@@ -21,6 +21,8 @@ public class ProductService {
     @Autowired
     private UploadService uploadService;
 
+
+
     public Long countTotal() {
         return productRepository.count();
     }

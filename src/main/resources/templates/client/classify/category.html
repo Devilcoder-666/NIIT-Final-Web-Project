@@ -5,12 +5,30 @@
 >
 
 <div layout:fragment="app-content">
+    <!--====== Product Breadcrumb ======-->
 
+    <!--====== End - Product Breadcrumb ======-->
 
     <!--====== Section 1 ======-->
     <div class="u-s-p-y-90">
         <div class="container">
             <div class="row">
+                <div class="col-lg-5">
+                    <div class="pd-breadcrumb u-s-m-b-30">
+                        <ul class="pd-breadcrumb__list">
+                            <li class="has-separator">
+
+                                <a th:href="@{/client/home}">Home</a></li>
+                            <li class="has-separator">
+
+                                <a th:href="@{/client/type/product}" th:text="${product.getCategory().getProductType().getName()}" > Electronics</a></li>
+
+                            <li class="is-marked">
+
+                                <a th:href="@{/client/category/product(id=${product.getCategory().getId()})}"  th:text="${product.getCategory().getName()}">Nikon Cameras</a></li>
+                        </ul>
+                    </div>
+                </div>
                 <div class="col-lg-12">
                     <div class="shop-p">
 

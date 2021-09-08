@@ -19,11 +19,11 @@
                                 <a th:href="@{/client/home}">Home</a></li>
                             <li class="has-separator">
 
-                                <a href="shop-side-version-2.html" th:text="${product.getCategory().getProductType().getName()}" > Electronics</a></li>
+                                <a th:href="@{/client/type/product}" th:text="${product.getCategory().getProductType().getName()}" > Electronics</a></li>
 
                             <li class="is-marked">
 
-                                <a href="shop-side-version-2.html"  th:text="${product.getCategory().getName()}">Nikon Cameras</a></li>
+                                <a th:href="@{/client/category/product(id=${product.getCategory().getId()})}"  th:text="${product.getCategory().getName()}">Nikon Cameras</a></li>
                         </ul>
                     </div>
                     <!--====== End - Product Breadcrumb ======-->
