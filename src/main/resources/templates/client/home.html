@@ -42,7 +42,7 @@
                                                         <a data-modal="modal"  data-tooltip="tooltip" data-placement="top" title="" data-original-title="Product Detail" th:href="@{/client/product/detail(id=${product.getId()})}"><i class="fas fa-search-plus"></i></a></li>
                                                     <li>
 
-                                                        <a  data-modal="modal"  data-tooltip="tooltip" data-placement="top"  data-original-title="Add to Cart"  th:attr="onclick=|addToCart('${product.getId()}')|">
+                                                        <a  data-modal="modal"  data-tooltip="tooltip" data-placement="top"  data-original-title="Add to Cart"  th:attr="onclick=|addToCart('${product.getId()}',1)|">
 
 
                                                                 <i class="fas  fa-cart-plus">
@@ -129,7 +129,20 @@
                                                         <a data-modal="modal"  data-tooltip="tooltip" data-placement="top" title="" data-original-title="Product Detail" th:href="@{/client/product/detail(id=${product.getId()})}"><i class="fas fa-search-plus"></i></a></li>
                                                     <li>
 
-                                                        <a data-modal="modal"  data-tooltip="tooltip" data-placement="top" title="" data-original-title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
+                                                        <a  data-modal="modal"  data-tooltip="tooltip" data-placement="top"  data-original-title="Add to Cart"  th:attr="onclick=|addToCart('${product.getId()}',1)|">
+
+
+                                                            <i class="fas  fa-cart-plus">
+                                                            </i>
+
+
+
+
+
+                                                        </a>
+
+
+                                                    </li>
 
 
                                                 </ul>
@@ -167,32 +180,6 @@
     </div>
 
 
-    <script type="text/javascript">
-        function addToCart(id){
-            const quantity = 1;//láy dữ liệu từ input number
 
-                //gửi dữ liệu lên server
-                $.ajax({
-                    url:"/client/cart/add-to-cart",
-                    dataType: 'json',
-                    method: 'post',
-                    data:{
-                        id: id,
-                        quantity: quantity
-                    },
-                    success: function (resp) {
-                        $('.mini-product-container').empty();
-                        renderMiniCartUI(resp);
-                        const totalCartItems =  resp.length;
-                        $('.total-item-round').text(totalCartItems);
-
-                    },
-                    error: function (err) {
-                        console.log(err)
-                    }
-                })
-
-        }
-    </script>
 </div>
 

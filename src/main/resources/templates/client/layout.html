@@ -832,7 +832,7 @@
             renderMiniProductUI(product);
             total = total + (product.quantity * product.price);
         }
-        $('.subtotal-value').html(total);
+        $('.subtotal-value').html('$'+total);
         $('.total-item-round').html(totalProduct);
     }
 
@@ -854,7 +854,37 @@
 
     loadCart();
 
+    function addToCart(id,quantity){
+      //láy dữ liệu từ input number
 
+        //gửi dữ liệu lên server
+        $.ajax({
+            url:"/client/cart/add-to-cart",
+            dataType: 'json',
+            method: 'post',
+            data:{
+                id: id,
+                quantity: quantity
+            },
+            success: function (resp) {
+                $('.mini-product-container').empty();
+                renderMiniCartUI(resp);
+                const totalCartItems =  resp.length;
+                $('.total-item-round').text(totalCartItems);
+
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+
+    }
+    function addToCartWithQuantity(){
+       const quantity= $('input[name="productQuantity"]').val();
+       const id= $('input[name="productQuantity"]').attr('data-id');
+        addToCart(id,quantity);
+
+    }
     function deleteProduct(id) {
 
         //gửi dữ liệu lên server
@@ -870,7 +900,7 @@
 
                 $('.mini-product-container').empty();
                 loadCart();
-                let total = resp.size();
+
 
 
 

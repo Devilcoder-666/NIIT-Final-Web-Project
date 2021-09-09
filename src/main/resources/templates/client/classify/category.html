@@ -50,7 +50,7 @@
                                                    data-original-title="Quick Look"></a></div>
                                             <div class="product-m__add-cart">
 
-                                                <a class="btn--e-brand" data-modal="modal" data-modal-id="#add-to-cart">Add
+                                                <a class="btn--e-brand" data-modal="modal" th:attr="onclick=|addToCart('${product.getId()}',1)|" >Add
                                                     to Cart</a></div>
                                         </div>
                                         <div class="product-m__content">
@@ -85,7 +85,7 @@
                                     <a href="shop-grid-full.html">0</a>
                                 </li>-->
                                 <li class="no-active" th:each="pageNumber:${#numbers.sequence(0, listProductByCategory.getTotalPages()-1)}"
-                                    th:attr="class=${activePage==pageNumber ? 'is-active' : 'no-active'}"    >
+                                    th:attr="class=${activePage==pageNumber ? 'is-active' : 'no-active'}"  >
 
                                     <a th:href="@{/client/category/product(page=${pageNumber},id=${id} )}" th:text="${pageNumber}">  0 </a>
                                 </li>
