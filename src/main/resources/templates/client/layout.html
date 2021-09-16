@@ -900,16 +900,20 @@
                   step:step },
             success:function (resp){
 
-                let quantity = parseInt($(`tr[data-id="${id}"] .input-counter .input-counter__text`).text());
+                let quantity = parseInt($(`tr[data-id="${id}"] .input-counter .input-counter__text`).val());
                 quantity += step;
-                console.log(quantity);
-                $(`tr[data-id="${id}"] .input-counter .input-counter__text`).html(quantity);
+                if(quantity == 0){
+                    deleteProduct(id);
+
+                } else if(quantity >0){
+                    $(`tr[data-id="${id}"] .input-counter .input-counter__text`).val(quantity);
+                    $('.mini-product-container').empty();
+                    loadMiniCart();
+                }
+
 
             }
         })
-
-
-
 
     }
     // to delete product on cart
