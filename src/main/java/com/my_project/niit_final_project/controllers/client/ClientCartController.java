@@ -88,7 +88,7 @@ public class ClientCartController {
 
         return ResponseEntity.ok(cartProducts);
    }
-    @PostMapping("/mini-cart/product/delete")
+    @PostMapping("/product/delete")
     @ResponseBody
     public ResponseEntity<?> getCart(HttpSession session,
                                      @RequestParam(name = "id") long id
@@ -103,15 +103,45 @@ public class ClientCartController {
         session.setAttribute("CART", tmpCartProducts);
         return ResponseEntity.ok(tmpCartProducts);
     }
+
+    @PostMapping("/change-quantity")
+     @ResponseBody
+    public ResponseEntity<?> changedQuantity(@RequestParam(name="id") long id,@RequestParam(name="step") int step , HttpSession session){
+        ArrayList<CartProduct> cartProducts= (ArrayList<CartProduct>) session.getAttribute("CART");
+        for(int i=0;i<cartProducts.size();i++){
+            if(cartProducts.get(i).getId()==id){
+                cartProducts.get(i).setQuantity(cartProducts.get(i).getQuantity()+step);
+            }
+        }
+        session.setAttribute("CART",cartProducts);
+        return ResponseEntity.ok(cartProducts);
+    }
     @GetMapping("/get-mini-cart")
     @ResponseBody
-    public ResponseEntity<?> getCart(HttpSession session) {
+    public ResponseEntity<?> getMiniCart(HttpSession session) {
         if (session.getAttribute("CART") == null) {
             return ResponseEntity.ok(new ArrayList<CartProduct>());
         }
         ArrayList<CartProduct> cartProducts = (ArrayList<CartProduct>) session.getAttribute("CART");
         return ResponseEntity.ok(cartProducts);
     }
+
+    @GetMapping("/get-cart")
+    @ResponseBody
+    public ResponseEntity<?> getCart(HttpSession session){
+        if (session.getAttribute("CART")==null){
+            return ResponseEntity.ok(new ArrayList<CartProduct>());
+        }
+        ArrayList<CartProduct> cartProducts = (ArrayList<CartProduct>) session.getAttribute("CART");
+        return ResponseEntity.ok(cartProducts);
+
+    }
+
+@GetMapping("/page")
+    public String getPage() {
+        return "/client/cart";
+}
+
 
 
 }

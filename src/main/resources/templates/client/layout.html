@@ -162,9 +162,9 @@
 
                             <!--====== List ======-->
                             <ul class="ah-list ah-list--design2 ah-list--link-color-secondary">
-                                <li>
+                               <!-- <li>
                                     <a href="shop-side-version-2.html">ALL PRODUCTS</a>
-                                </li>
+                                </li>-->
 
                                 <li class="has-dropdown" th:if="${type.getCategories().size()>0}"
                                     th:each="type:${listProductType}">
@@ -270,7 +270,8 @@
                                                 <a class="mini-link btn--e-brand-b-2" href="checkout.html">PROCEED TO
                                                     CHECKOUT</a>
 
-                                                <a class="mini-link btn--e-transparent-secondary-b-2" href="cart.html">VIEW
+                                                <a class="mini-link btn--e-transparent-secondary-b-2"
+                                                   th:href="@{/client/cart/page}">VIEW
                                                     CART</a></div>
                                         </div>
                                         <!--====== End - Mini Product Statistics ======-->
@@ -771,7 +772,7 @@
         class="fas fa-long-arrow-alt-up"></i></a>
 <script type="text/javascript">
 
-
+    /*  start script for mini Cart*/
     $.ajax({
         url: "/client/cart/get-total-cart-items",
         dataType: 'json',
@@ -786,12 +787,11 @@
 
     })
 
-
-    function renderMiniProductUI(product) {
+    // render product on mini cart when have change
+    function renderMiniCartProductUI(product) {
 
         $('.mini-product-container').append(
             `
-
 
      <div class="card-mini-product"  >
             <div class="mini-product">
@@ -824,20 +824,21 @@
         )
     }
 
+    // reder mini cart when have change
     function renderMiniCartUI(resp) {
         let total = 0;
-        let totalProduct=resp.length;
+        let totalProduct = resp.length;
         for (let i = 0; i < resp.length; i++) {
             const product = resp[i];
-            renderMiniProductUI(product);
+            renderMiniCartProductUI(product);
             total = total + (product.quantity * product.price);
         }
-        $('.subtotal-value').html('$'+total);
+        $('.subtotal-value').html('$' + total);
         $('.total-item-round').html(totalProduct);
     }
 
-
-    function loadCart() {
+    // load cart run when change page
+    function loadMiniCart() {
         $.ajax({
             url: "/client/cart/get-mini-cart",
             dataType: "json",
@@ -852,24 +853,25 @@
         })
     }
 
-    loadCart();
-
-    function addToCart(id,quantity){
-      //láy dữ liệu từ input number
+    loadMiniCart();
+    /*  end script for mini Cart*/
+    // for product on other pages
+    function addToCart(id, quantity) {
+        //láy dữ liệu từ input number
 
         //gửi dữ liệu lên server
         $.ajax({
-            url:"/client/cart/add-to-cart",
+            url: "/client/cart/add-to-cart",
             dataType: 'json',
             method: 'post',
-            data:{
+            data: {
                 id: id,
                 quantity: quantity
             },
             success: function (resp) {
                 $('.mini-product-container').empty();
                 renderMiniCartUI(resp);
-                const totalCartItems =  resp.length;
+                const totalCartItems = resp.length;
                 $('.total-item-round').text(totalCartItems);
 
             },
@@ -879,17 +881,43 @@
         })
 
     }
-    function addToCartWithQuantity(){
-       const quantity= $('input[name="productQuantity"]').val();
-       const id= $('input[name="productQuantity"]').attr('data-id');
-        addToCart(id,quantity);
+
+    // to add product to cart on detail page
+    function addToCartWithQuantity() {
+        const quantity = $('input[name="productQuantity"]').val();
+        const id = $('input[name="productQuantity"]').attr('data-id');
+        addToCart(id, quantity);
 
     }
+
+
+    function changeQuantity(step,id){
+        $.ajax({
+            url:"/client/cart/change-quantity",
+            dataType:'json',
+            method:'post',
+            data:{id:id,
+                  step:step },
+            success:function (resp){
+
+                let quantity = parseInt($(`tr[data-id="${id}"] .input-counter .input-counter__text`).text());
+                quantity += step;
+                console.log(quantity);
+                $(`tr[data-id="${id}"] .input-counter .input-counter__text`).html(quantity);
+
+            }
+        })
+
+
+
+
+    }
+    // to delete product on cart
     function deleteProduct(id) {
 
         //gửi dữ liệu lên server
         $.ajax({
-            url: "/client/cart/mini-cart/product/delete",
+            url: "/client/cart/product/delete",
             dataType: 'json',
             method: 'post',
             data: {
@@ -897,13 +925,10 @@
 
             },
             success: function (resp) {
-
-                $('.mini-product-container').empty();
+                $('.body-cart').empty();
                 loadCart();
-
-
-
-
+                $('.mini-product-container').empty();
+                loadMiniCart();
             },
             error: function (err) {
                 console.log(err)
@@ -913,6 +938,89 @@
     }
 
 
+    /*  start script for Cart page*/
+    function renderCartUI(resp) {
+        let subTotal = 0;
+
+        for (let i = 0; i < resp.length; i++) {
+            const product = resp[i];
+            renderCartProductUI(product);
+            subTotal = subTotal + (product.quantity * product.price);
+        }
+        let tax = subTotal * 10 / 100;
+        let total = subTotal + tax;
+        $('.subtotal').html('$' + subTotal);
+        $('.tax').html('$' + tax);
+        $('.total').html('$' + total);
+
+
+    }
+    function loadCart() {
+        $.ajax({
+            url: "/client/cart/get-cart",
+            dataType: 'json',
+            method: 'get',
+            success: function (resp) {
+
+                renderCartUI(resp);
+
+            },
+            error: function (err) {
+                console.log(err);
+            }
+
+
+        })
+    }
+    loadCart()
+
+    function renderCartProductUI(product) {
+        $('.body-cart').append(
+            `<tr data-id="${product.id}">
+                  <td>
+                    <div class="table-p__box">
+                      <div class="table-p__img-wrap">
+
+                        <img class="u-img-fluid" src="/uploads/${product.picture}" alt=""></div>
+                      <div class="table-p__info">
+
+                                                            <span class="table-p__name">
+
+                                                                <a href="product-detail.html" >${product.name}</a></span>
+
+
+
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+
+                    <span class="table-p__price">${product.price}</span></td>
+                  <td>
+                    <div class="table-p__input-counter-wrap">
+
+
+             <div class="input-counter">
+
+             <span class="input-counter__minus fas fa-minus" onclick="changeQuantity(-1,${product.id})" ></span>
+
+             <input class="input-counter__text input-counter--text-primary-style" name="cartProductQuantity"  type="text" value="${product.quantity}" data-min="1" data-max="1000">
+
+             <span class="input-counter__plus fas fa-plus" onclick="changeQuantity(1,${product.id})"></span>
+              </div>
+
+             </div>
+                       </td>
+             <td>
+             <div class="table-p__del-wrap">
+
+             <a class="far fa-trash-alt table-p__delete-link" onclick="deleteProduct(${product.id})" ></a></div>
+             </td>
+            </tr>`)
+    }
+
+
+        /*  start   script for mini Cart*/
 </script>
 
 <!--====== Noscript ======-->
