@@ -2,6 +2,7 @@ package com.my_project.niit_final_project.entities;
 
 
 import lombok.Data;
+import org.springframework.context.annotation.Bean;
 
 import javax.persistence.*;
 import java.io.Serializable;

@@ -24,15 +24,23 @@ public class ClientProductController {
 
     @GetMapping("/home")
     private String getHome(Model model) {
-        Page<Product> listNewProduct = productService.getPageNewProduct(0, 8);
-        Page<Product> listSaleProduct = productService.getPageSaleProduct(0, 8);
-        Page<ProductType> listProductType = productTypeService.getPageProductType(0, 6);
-        ProductType productType = new ProductType();
-        int u = productTypeService.getProductTypeById(4).getCategories().size();
-        model.addAttribute("listNewProduct", listNewProduct.iterator());
-        model.addAttribute("listSaleProduct", listSaleProduct.iterator());
-        model.addAttribute("listProductType", listProductType.iterator());
-        return "/client/home";
+        try {
+            Page<Product> listNewProduct = productService.getPageNewProduct(0, 8);
+            Page<Product> listSaleProduct = productService.getPageSaleProduct(0, 8);
+            Page<ProductType> listProductType = productTypeService.getPageProductType(0, 6);
+            ProductType productType = new ProductType();
+            int u = productTypeService.getProductTypeById(4).getCategories().size();
+            model.addAttribute("listNewProduct", listNewProduct.iterator());
+            model.addAttribute("listSaleProduct", listSaleProduct.iterator());
+            model.addAttribute("listProductType", listProductType.iterator());
+
+        } catch (ArithmeticException e) {
+            //In ra màn hình tên ngoại lệ
+            System.out.println(e);
+        } finally
+        { return "/client/home"; }
+
+
 
     }
 
