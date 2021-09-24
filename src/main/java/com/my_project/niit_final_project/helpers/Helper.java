@@ -1,5 +1,10 @@
 package com.my_project.niit_final_project.helpers;
 
+import com.my_project.niit_final_project.entities.User;
+import com.my_project.niit_final_project.repositories.UserRepository;
+import com.my_project.niit_final_project.repositories.UserRoleRepository;
+import com.my_project.niit_final_project.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
@@ -8,6 +13,10 @@ import java.security.NoSuchAlgorithmException;
 
 @Service
 public class Helper {
+
+
+
+
     public String getMD5(String input) {
         try {
 
@@ -32,6 +41,7 @@ public class Helper {
             throw new RuntimeException(e);
         }
     }
+
 
 
 

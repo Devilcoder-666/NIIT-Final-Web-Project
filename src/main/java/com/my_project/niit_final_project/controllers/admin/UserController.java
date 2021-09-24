@@ -1,6 +1,8 @@
 package com.my_project.niit_final_project.controllers.admin;
 
 import com.my_project.niit_final_project.entities.User;
+import com.my_project.niit_final_project.services.CategoryService;
+import com.my_project.niit_final_project.services.UserRoleService;
 import com.my_project.niit_final_project.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.DefaultValue;
@@ -19,11 +21,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class UserController implements ICRUD<User>{
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserRoleService userRoleService;
     @Override
     @GetMapping("/add")
     public String add(Model model) {
         User user = new User();
         model.addAttribute("user", user);
+        model.addAttribute("roles",userRoleService.getAll());
         return "admin/user/add";
     }
     @PostMapping("/do-add")
@@ -84,6 +89,7 @@ public class UserController implements ICRUD<User>{
     public String edit(Model model, @RequestParam(name = "id") long id) {
         User user= userService.getUserById(id);
         model.addAttribute("user",user);
+        model.addAttribute("roles",userRoleService.getAll());
         return "admin/user/edit";
     }
 

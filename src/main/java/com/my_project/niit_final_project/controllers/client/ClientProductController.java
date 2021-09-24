@@ -1,4 +1,5 @@
 package com.my_project.niit_final_project.controllers.client;
+import com.my_project.niit_final_project.entities.Category;
 import com.my_project.niit_final_project.entities.Product;
 import com.my_project.niit_final_project.entities.ProductType;
 import com.my_project.niit_final_project.services.CategoryService;
@@ -59,34 +60,36 @@ public class ClientProductController {
     @GetMapping("/category/product")
     private String getCategoryProduct(Model model, @RequestParam(name = "id") long id, @RequestParam(name = "page", defaultValue = "0") int page, @RequestParam(name = "activePage", defaultValue = "0") int activePage) {
 
+        try {int totalPage = productService.getPageProductByCategoryId(page, 10, id).getTotalPages();
+            //paging logic
+            if (page > totalPage + 1) {
+                Page<Product> listProductByCategory = productService.getPageProductByCategoryId(activePage, 10, id);
+                Page<ProductType> listProductType = productTypeService.getPageProductType(0, 6);
+                model.addAttribute("listProductType", listProductType.iterator());
+                model.addAttribute("listProductByCategory", listProductByCategory);
+                model.addAttribute("activePage", activePage);
 
-        int totalPage = productService.getPageProductByCategoryId(page, 10, id).getTotalPages();
 
-        //paging logic
-        if (page > totalPage + 1) {
-            Page<Product> listProductByCategory = productService.getPageProductByCategoryId(activePage, 10, id);
-             Product product=listProductByCategory.iterator().next();
-            Page<ProductType> listProductType = productTypeService.getPageProductType(0, 6);
-            model.addAttribute("product",product);
-            model.addAttribute("listProductType", listProductType.iterator());
-            model.addAttribute("listProductByCategory", listProductByCategory);
-            model.addAttribute("activePage", activePage);
-            model.addAttribute("id", id);
-
-        } else {
-            Page<Product> listProductByCategory = productService.getPageProductByCategoryId(page, 10, id);
-            Page<ProductType> listProductType = productTypeService.getPageProductType(0, 6);
-            Product product=listProductByCategory.iterator().next();
-            model.addAttribute("product",product);
-            model.addAttribute("listProductType", listProductType.iterator());
-            model.addAttribute("listProductByCategory", listProductByCategory);
-            model.addAttribute("activePage", page);
-            model.addAttribute("id", id);
-
+            } else {
+                Page<Product> listProductByCategory = productService.getPageProductByCategoryId(page, 10, id);
+                Page<ProductType> listProductType = productTypeService.getPageProductType(0, 6);
+                model.addAttribute("listProductType", listProductType.iterator());
+                model.addAttribute("listProductByCategory", listProductByCategory);
+                model.addAttribute("activePage", page);
+            }} catch (Exception e){
+            System.out.println(e);
         }
+            finally{
+
+            Category category = categoryService.getCategoryById(id);
+            model.addAttribute("navCategory",category);
+            model.addAttribute("id", id);
+            return "/client/classify/category";}
 
 
-        return "/client/classify/category";
+
+
+
     }
 
 

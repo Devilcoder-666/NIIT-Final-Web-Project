@@ -1,7 +1,6 @@
 package com.my_project.niit_final_project.entities;
 
 import lombok.Data;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;

@@ -54,13 +54,17 @@
                         <input type="text" th:field="*{address}" class="form-control"  placeholder="Enter new password">
                     </div>
 
-                         <div class="form-group">
-                             <label>Role</label>
-                             <select th:field="*{role}" class="form-control">
-                                 <option value="1">Client</option>
-                                 <option value="2">Admin</option>
-                             </select>
-                         </div>
+                    <div class="form-group" >
+                        <label>Roles:
+                            <input type="checkbox" name="roles"
+                                   th:each="role : ${roles}"
+                                   th:text="${role.getFeName()}"
+                                   th:value="${role.getId()}"
+                                   th:field="*{userRoles}"
+                            />
+                        </label>
+
+                    </div>
                 </div>
                 <!-- /.card-body -->
 

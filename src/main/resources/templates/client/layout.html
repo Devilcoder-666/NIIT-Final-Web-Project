@@ -46,7 +46,7 @@
 
                     <!--====== Main Logo ======-->
 
-                    <a class="main-logo" href="index.html">
+                    <a class="main-logo" th:href="@{/client/home}">
 
                         <img th:src="@{/client/images/logo/logo-1.png}" alt=""></a>
                     <!--====== End - Main Logo ======-->
@@ -68,47 +68,46 @@
                     <!--====== Dropdown Main plugin ======-->
                     <div class="menu-init" id="navigation">
 
-                        <button class="btn btn--icon toggle-button toggle-button--secondary fas fa-cogs"
+                        <button class="btn btn--icon toggle-button toggle-button--secondary fas fa-user-circle"
                                 type="button"></button>
 
                         <!--====== Menu ======-->
-                        <div class="ah-lg-mode">
+
+
+
+                   <!--     <div class="ah-lg-mode">
 
                             <span class="ah-close">✕ Close</span>
 
-                            <!--====== List ======-->
-                            <ul class="ah-list ah-list--design1 ah-list--link-color-secondary">
+                            &lt;!&ndash;====== List ======&ndash;&gt;
+                            <ul class="ah-list ah-list&#45;&#45;design1 ah-list&#45;&#45;link-color-secondary">
                                 <li class="has-dropdown" data-tooltip="tooltip" data-placement="left" title=""
                                     data-original-title="Account">
 
                                     <a><i class="far fa-user-circle"></i></a>
 
-                                    <!--====== Dropdown ======-->
+                                    &lt;!&ndash;====== Dropdown ======&ndash;&gt;
 
                                     <span class="js-menu-toggle"></span>
                                     <ul style="width:120px">
+
                                         <li>
 
-                                            <a href="dashboard.html"><i class="fas fa-user-circle u-s-m-r-6"></i>
-
-                                                <span>Account</span></a></li>
-                                        <li>
-
-                                            <a href="signup.html"><i class="fas fa-user-plus u-s-m-r-6"></i>
+                                            <a th:href="@{/signup}"><i class="fas fa-user-plus u-s-m-r-6"></i>
 
                                                 <span>Signup</span></a></li>
                                         <li>
 
-                                            <a href="signin.html"><i class="fas fa-lock u-s-m-r-6"></i>
+                                            <a th:href="@{/login}"><i class="fas fa-lock u-s-m-r-6"></i>
 
                                                 <span>Signin</span></a></li>
                                         <li>
 
-                                            <a href="signup.html"><i class="fas fa-lock-open u-s-m-r-6"></i>
+                                            <a th:href="@{/logout}"><i class="fas fa-lock-open u-s-m-r-6"></i>
 
                                                 <span>Signout</span></a></li>
                                     </ul>
-                                    <!--====== End - Dropdown ======-->
+                                    &lt;!&ndash;====== End - Dropdown ======&ndash;&gt;
                                 </li>
 
                                 <li data-tooltip="tooltip" data-placement="left" title="" data-original-title="Contact">
@@ -118,8 +117,10 @@
 
                                     <a href="mailto:contact@domain.com"><i class="far fa-envelope"></i></a></li>
                             </ul>
-                            <!--====== End - List ======-->
-                        </div>
+                            &lt;!&ndash;====== End - List ======&ndash;&gt;
+                        </div>-->
+
+
                         <!--====== End - Menu ======-->
                     </div>
                     <!--====== End - Dropdown Main plugin ======-->
@@ -218,10 +219,8 @@
                             <ul class="ah-list ah-list--design1 ah-list--link-color-secondary">
                                 <li>
 
-                                    <a href="index.html"><i class="fas fa-home u-c-brand"></i></a></li>
-                                <li>
+                                    <a th:href="@{/client/home}"><i class="fas fa-home u-c-brand"></i></a></li>
 
-                                    <a href="wishlist.html"><i class="far fa-heart"></i></a></li>
                                 <li class="has-dropdown">
 
                                     <a class="mini-cart-shop-link"><i class="fas fa-shopping-bag"></i>
@@ -276,6 +275,34 @@
                                         </div>
                                         <!--====== End - Mini Product Statistics ======-->
                                     </div>
+                                    <!--====== End - Dropdown ======-->
+                                </li>
+                                <li class="has-dropdown" data-tooltip="tooltip" data-placement="left" title=""
+                                    data-original-title="Account">
+
+                                    <a><i class="far fa-user-circle"></i></a>
+
+                                    <!--====== Dropdown ======-->
+
+                                    <span class="js-menu-toggle"></span>
+                                    <ul style="width:120px">
+
+                                        <li>
+
+                                            <a th:href="@{/signup}"><i class="fas fa-user-plus u-s-m-r-6"></i>
+
+                                                <span>Signup</span></a></li>
+                                        <li>
+
+                                            <a th:href="@{/login}"><i class="fas fa-lock u-s-m-r-6"></i>
+
+                                                <span>Signin</span></a></li>
+                                        <li>
+
+                                            <a th:href="@{/logout}"><i class="fas fa-lock-open u-s-m-r-6"></i>
+
+                                                <span>Signout</span></a></li>
+                                    </ul>
                                     <!--====== End - Dropdown ======-->
                                 </li>
                             </ul>
@@ -999,7 +1026,7 @@
                   </td>
                   <td>
 
-                    <span class="table-p__price">${product.price}</span></td>
+                    <span class="table-p__price">$${product.price}</span></td>
                   <td>
                     <div class="table-p__input-counter-wrap">
 

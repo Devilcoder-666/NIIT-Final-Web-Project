@@ -3,6 +3,7 @@ package com.my_project.niit_final_project.services;
 import com.my_project.niit_final_project.entities.User;
 import com.my_project.niit_final_project.helpers.Helper;
 import com.my_project.niit_final_project.repositories.UserRepository;
+import com.my_project.niit_final_project.repositories.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.Local;
 import org.springframework.data.domain.Page;
@@ -25,19 +26,14 @@ import java.time.LocalDateTime;
 public class UserService  {
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
-    private Helper helper;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private UserRoleRepository userRoleRepository;
     @Autowired
     private UserDetailsService userDetailsService;
 
     public boolean save(User user) {
-
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         LocalDateTime localDate = LocalDateTime.now();
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
       /*  user.setPassword(helper.getMD5(user.getPassword()));*/
         user.setCreatedDate(localDate);
 

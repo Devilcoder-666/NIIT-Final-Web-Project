@@ -68,8 +68,8 @@
                             <td th:text="${user.getPhoneNumber()}"></td>
                             <td th:text="${user.getAddress()}"></td>
                             <td>
-                                <div th:if="${user.role==2}">Admin</div>
-                                <div th:if="${user.role==1}">Client</div>
+                                <div th:each="role:${user.getUserRoles().iterator()}" th:text="${role.getFeName()}"></div>
+
                             </td>
                             <td>
                                 <a style="margin-top:5px;" class="btn btn-danger"

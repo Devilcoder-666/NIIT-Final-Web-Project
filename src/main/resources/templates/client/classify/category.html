@@ -23,14 +23,14 @@
                         <ul class="pd-breadcrumb__list">
                             <li class="has-separator">
 
-                                <a th:href="@{/client/home}">Home</a></li>
+                                <a th:href="@{/client/home}">HOME</a></li>
                             <li class="has-separator">
 
-                                <a th:href="@{/client/type/product}" th:text="${product.getCategory().getProductType().getName()}" > Electronics</a></li>
+                                <a th:href="@{/client/type/product}" th:text="${navCategory.getProductType().getName()}" > Electronics</a></li>
 
                             <li class="is-marked">
 
-                                <a th:href="@{/client/category/product(id=${product.getCategory().getId()})}"  th:text="${product.getCategory().getName()}">Nikon Cameras</a></li>
+                                <a th:href="@{/client/category/product(id=${navCategory.getId()})}"  th:text="${navCategory.getName()}">Nikon Cameras</a></li>
                         </ul>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
 
                                     <a href="shop-grid-full.html">0</a>
                                 </li>-->
-                                <li class="no-active" th:each="pageNumber:${#numbers.sequence(0, listProductByCategory.getTotalPages()-1)}"
+                                <li class="no-active" th:each="pageNumber:${#numbers.sequence(0, listProductByCategory.getTotalPages())}"
                                     th:attr="class=${activePage==pageNumber ? 'is-active' : 'no-active'}"  >
 
                                     <a th:href="@{/client/category/product(page=${pageNumber},id=${id} )}" th:text="${pageNumber}">  0 </a>

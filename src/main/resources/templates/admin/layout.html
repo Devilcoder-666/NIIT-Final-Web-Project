@@ -16,6 +16,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" th:href="@{/admin/plugins/fontawesome-free/css/all.min.css}">
     <!-- Theme style -->
     <link rel="stylesheet" th:href="@{/admin/dist/css/adminlte.min.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -272,5 +275,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script th:src="@{/admin/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <!-- AdminLTE App -->
 <script th:src="@{/admin/dist/js/adminlte.min.js}"></script>
+<script type="text/javascript">
+
+    $("#chosen-select").chosen({
+        no_results_text: "Oops, nothing found!"
+    })
+
+</script>
 </body>
 </html>
