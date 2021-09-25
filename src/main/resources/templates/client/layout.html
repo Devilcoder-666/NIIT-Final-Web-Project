@@ -74,14 +74,13 @@
                         <!--====== Menu ======-->
 
 
-
-                   <!--     <div class="ah-lg-mode">
+                        <div class="ah-lg-mode">
 
                             <span class="ah-close">✕ Close</span>
 
-                            &lt;!&ndash;====== List ======&ndash;&gt;
-                            <ul class="ah-list ah-list&#45;&#45;design1 ah-list&#45;&#45;link-color-secondary">
-                                <li class="has-dropdown" data-tooltip="tooltip" data-placement="left" title=""
+                            <!--====== List ======-->
+                            <ul class="ah-list ah-list--design1 ah-list--link-color-secondary">
+                                <!--<li class="has-dropdown" data-tooltip="tooltip" data-placement="left" title=""
                                     data-original-title="Account">
 
                                     <a><i class="far fa-user-circle"></i></a>
@@ -108,17 +107,17 @@
                                                 <span>Signout</span></a></li>
                                     </ul>
                                     &lt;!&ndash;====== End - Dropdown ======&ndash;&gt;
-                                </li>
+                                </li>-->
 
                                 <li data-tooltip="tooltip" data-placement="left" title="" data-original-title="Contact">
 
-                                    <a href="tel:+0900901904"><i class="fas fa-phone-volume"></i></a></li>
+                                    <a href="tel:+0961130568"><i class="fas fa-phone-volume"></i></a></li>
                                 <li data-tooltip="tooltip" data-placement="left" title="" data-original-title="Mail">
 
-                                    <a href="mailto:contact@domain.com"><i class="far fa-envelope"></i></a></li>
+                                    <a href="mailto:zexaldai@gmail.com"><i class="far fa-envelope"></i></a></li>
                             </ul>
-                            &lt;!&ndash;====== End - List ======&ndash;&gt;
-                        </div>-->
+                            <!--====== End - List ======-->
+                        </div>
 
 
                         <!--====== End - Menu ======-->
@@ -163,9 +162,9 @@
 
                             <!--====== List ======-->
                             <ul class="ah-list ah-list--design2 ah-list--link-color-secondary">
-                               <!-- <li>
-                                    <a href="shop-side-version-2.html">ALL PRODUCTS</a>
-                                </li>-->
+                                <!-- <li>
+                                     <a href="shop-side-version-2.html">ALL PRODUCTS</a>
+                                 </li>-->
 
                                 <li class="has-dropdown" th:if="${type.getCategories().size()>0}"
                                     th:each="type:${listProductType}">
@@ -266,7 +265,7 @@
                                                 <span class="subtotal-value">$16</span></div>
                                             <div class="mini-action">
 
-                                                <a class="mini-link btn--e-brand-b-2" href="checkout.html">PROCEED TO
+                                                <a class="mini-link btn--e-brand-b-2" th:href="@{/checkout}">PROCEED TO
                                                     CHECKOUT</a>
 
                                                 <a class="mini-link btn--e-transparent-secondary-b-2"
@@ -798,23 +797,7 @@
 <a id="topScroll" href="#top" style="position: fixed; z-index: 100; display: none;"><i
         class="fas fa-long-arrow-alt-up"></i></a>
 <script type="text/javascript">
-
-    /*  start script for mini Cart*/
-    $.ajax({
-        url: "/client/cart/get-total-cart-items",
-        dataType: 'json',
-        method: 'get',
-        success: function (resp) {
-            const totalCartItems = resp.total_cart_items;
-            $('.total-item-round').text(totalCartItems);
-        },
-        error: function (err) {
-            console.log(err)
-        },
-
-    })
-
-    // render product on mini cart when have change
+    /* START MINI CART */
     function renderMiniCartProductUI(product) {
 
         $('.mini-product-container').append(
@@ -851,7 +834,6 @@
         )
     }
 
-    // reder mini cart when have change
     function renderMiniCartUI(resp) {
         let total = 0;
         let totalProduct = resp.length;
@@ -864,7 +846,6 @@
         $('.total-item-round').html(totalProduct);
     }
 
-    // load cart run when change page
     function loadMiniCart() {
         $.ajax({
             url: "/client/cart/get-mini-cart",
@@ -881,8 +862,8 @@
     }
 
     loadMiniCart();
-    /*  end script for mini Cart*/
-    // for product on other pages
+    /* END MINI CART */
+    /* START GENERAL CART */
     function addToCart(id, quantity) {
         //láy dữ liệu từ input number
 
@@ -909,41 +890,6 @@
 
     }
 
-    // to add product to cart on detail page
-    function addToCartWithQuantity() {
-        const quantity = $('input[name="productQuantity"]').val();
-        const id = $('input[name="productQuantity"]').attr('data-id');
-        addToCart(id, quantity);
-
-    }
-
-
-    function changeQuantity(step,id){
-        $.ajax({
-            url:"/client/cart/change-quantity",
-            dataType:'json',
-            method:'post',
-            data:{id:id,
-                  step:step },
-            success:function (resp){
-
-                let quantity = parseInt($(`tr[data-id="${id}"] .input-counter .input-counter__text`).val());
-                quantity += step;
-                if(quantity == 0){
-                    deleteProduct(id);
-
-                } else if(quantity >0){
-                    $(`tr[data-id="${id}"] .input-counter .input-counter__text`).val(quantity);
-                    $('.mini-product-container').empty();
-                    loadMiniCart();
-                }
-
-
-            }
-        })
-
-    }
-    // to delete product on cart
     function deleteProduct(id) {
 
         //gửi dữ liệu lên server
@@ -960,6 +906,8 @@
                 loadCart();
                 $('.mini-product-container').empty();
                 loadMiniCart();
+                $('.o-summary__item-wrap').empty();
+                loadOrder();
             },
             error: function (err) {
                 console.log(err)
@@ -968,8 +916,58 @@
 
     }
 
+    $.ajax({
+        url: "/client/cart/get-total-cart-items",
+        dataType: 'json',
+        method: 'get',
+        success: function (resp) {
+            const totalCartItems = resp.total_cart_items;
+            $('.total-item-round').text(totalCartItems);
+        },
+        error: function (err) {
+            console.log(err)
+        },
 
-    /*  start script for Cart page*/
+    })
+    /* END GENERAL CART */
+    /* START DETAIL PAGE */
+    function addToCartWithQuantity() {
+        const quantity = $('input[name="productQuantity"]').val();
+        const id = $('input[name="productQuantity"]').attr('data-id');
+        addToCart(id, quantity);
+
+    }
+
+    /* END DETAIL PAGE */
+    /* START CART PAGE */
+    function changeQuantity(step, id) {
+        $.ajax({
+            url: "/client/cart/change-quantity",
+            dataType: 'json',
+            method: 'post',
+            data: {
+                id: id,
+                step: step
+            },
+            success: function (resp) {
+
+                let quantity = parseInt($(`tr[data-id="${id}"] .input-counter .input-counter__text`).val());
+                quantity += step;
+                if (quantity == 0) {
+                    deleteProduct(id);
+
+                } else if (quantity > 0) {
+                    $(`tr[data-id="${id}"] .input-counter .input-counter__text`).val(quantity);
+                    $('.mini-product-container').empty();
+                    loadMiniCart();
+                }
+
+
+            }
+        })
+
+    }
+
     function renderCartUI(resp) {
         let subTotal = 0;
 
@@ -986,6 +984,7 @@
 
 
     }
+
     function loadCart() {
         $.ajax({
             url: "/client/cart/get-cart",
@@ -1003,6 +1002,7 @@
 
         })
     }
+
     loadCart()
 
     function renderCartProductUI(product) {
@@ -1050,8 +1050,67 @@
             </tr>`)
     }
 
+    /* END CART PAGE */
+    /* START ORDER PAGE */
+    function renderOrderProductUI(product) {
+        $('.o-summary__item-wrap').append(`
+           <div class="o-card">
+                                            <div class="o-card__flex">
+                                                <div class="o-card__img-wrap">
 
-        /*  start   script for mini Cart*/
+                                                    <img class="u-img-fluid" src="/uploads/${product.picture}" alt=""></div>
+                                                <div class="o-card__info-wrap">
+
+                                                            <span class="o-card__name">
+
+                                                                <a href="product-detail.html">${product.name}</a></span>
+
+                                                    <span class="o-card__quantity">X ${product.quantity}</span>
+
+                                                    <span class="o-card__price">$${product.price}</span></div>
+                                            </div>
+
+                                            <a class="o-card__del far fa-trash-alt" onclick="deleteProduct(${product.id})"></a>
+                                        </div>
+
+
+           `)
+
+    }
+
+    function renderOrderUI(resp) {
+        let subTotal = 0;
+
+        for (let i = 0; i < resp.length; i++) {
+            const product = resp[i];
+            renderOrderProductUI(product);
+            subTotal = subTotal + (product.quantity * product.price);
+        }
+        let tax = subTotal * 10 / 100;
+        let total = subTotal + tax;
+        $('.subtotal').html('$' + subTotal);
+        $('.tax').html('$' + tax);
+        $('.total').html('$' + total);
+
+
+    }
+
+    function loadOrder() {
+        $.ajax({
+            url: "/client/get-order",
+            dataType: 'json',
+            method: 'get',
+            success: function (resp) {
+                renderOrderUI(resp);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+    }
+
+    loadOrder()
+    /* END ORDER PAGE */
 </script>
 
 <!--====== Noscript ======-->

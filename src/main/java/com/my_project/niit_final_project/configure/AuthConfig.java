@@ -77,6 +77,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN")
+                .and().authorizeRequests().antMatchers("/checkout").hasAnyRole("ADMIN","USER")
                 .and().authorizeRequests().antMatchers("/","/client/**","/client/cart/**","/css/*", "/js/*").permitAll()
                 .and().formLogin().loginPage("/login").and().logout().logoutUrl("/logout")
                 .and().exceptionHandling().accessDeniedPage("/access_deny");

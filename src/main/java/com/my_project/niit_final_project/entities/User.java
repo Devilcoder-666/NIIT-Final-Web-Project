@@ -2,7 +2,7 @@ package com.my_project.niit_final_project.entities;
 
 
 import lombok.Data;
-import org.springframework.context.annotation.Bean;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -36,6 +36,7 @@ public class User implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     Set<UserRole> userRoles = new HashSet<>();
+
 
 
     @Override
@@ -121,6 +122,7 @@ public class User implements Serializable {
         this.address = address;
         this.createdDate = createdDate;
         this.userRoles = userRoles;
+
     }
 
     public User() {}

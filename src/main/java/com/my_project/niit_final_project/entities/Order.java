@@ -22,14 +22,14 @@ public class Order {
     @Column(name = "received_address")
     String receivedAddress;
 
-    @Column(name = "user_id")
+    @Column(name="user_id")
     Long userId;
 
     @Column(name = "status")
     Integer status;
 
     @OneToMany(mappedBy = "order" , fetch = FetchType.LAZY)
-    Collection<OrderProduct> orderItems;
+    Collection<OrderProduct> orderProducts;
 
 
 

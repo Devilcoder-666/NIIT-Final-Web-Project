@@ -20,6 +20,7 @@ import com.my_project.niit_final_project.configure.*;
 
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 
 @Service
@@ -57,7 +58,7 @@ public class UserService  {
     public User getUserById(long id) {
         return userRepository.findById(id).get();
     }
-
+    public User getUseByEmail(String email){return userRepository.findByEmail(email);}
     public Page<User> getPageUser(int page ){
         Pageable pageable=  PageRequest.of(page,10);
         return userRepository.findAll(pageable);

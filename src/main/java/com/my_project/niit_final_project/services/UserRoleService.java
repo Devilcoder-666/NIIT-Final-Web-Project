@@ -1,5 +1,6 @@
 package com.my_project.niit_final_project.services;
 
+import com.my_project.niit_final_project.entities.User;
 import com.my_project.niit_final_project.entities.UserRole;
 import com.my_project.niit_final_project.repositories.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,5 +14,9 @@ public class UserRoleService {
 
     public Iterable<UserRole> getAll(){
         return userRoleRepository.findAll() ;
+    }
+
+    public UserRole getUserRoleById(long id) {
+        return userRoleRepository.findById(id).get();
     }
 }
