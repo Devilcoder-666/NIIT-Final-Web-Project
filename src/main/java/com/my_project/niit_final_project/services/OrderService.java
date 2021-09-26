@@ -1,21 +1,57 @@
 package com.my_project.niit_final_project.services;
 
+import com.my_project.niit_final_project.entities.CartProduct;
 import com.my_project.niit_final_project.entities.Order;
+import com.my_project.niit_final_project.entities.OrderProduct;
 import com.my_project.niit_final_project.entities.User;
+import com.my_project.niit_final_project.repositories.OrderProductRepository;
 import com.my_project.niit_final_project.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @Service
 public class OrderService {
     @Autowired
     OrderRepository orderRepository;
+    @Autowired
+    OrderProductRepository orderProductRepository;
+    @Autowired
+    UserService userService;
+
+
+    public void makeOrder(String shipAddress,  double total, ArrayList<CartProduct> cartProducts){
+        Order order=new Order();
+        LocalDateTime localDate = LocalDateTime.now();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        User user = userService.getUseByEmail(currentPrincipalName);
+        order.setReceivedAddress(shipAddress);
+        order.setUserId(user.getId());
+        order.setTotal(total);
+        order.setOrderDate(localDate);
+        orderRepository.save(order);
+        for (CartProduct cartProduct: cartProducts) {
+            OrderProduct orderProduct=new OrderProduct();
+            orderProduct.setName(cartProduct.getName());
+            orderProduct.setPrice(cartProduct.getPrice());
+            orderProduct.setQuantity(cartProduct.getQuantity());
+            orderProduct.setOrderId(order.getId());
+            orderProduct.setProductId(cartProduct.getId());
+            orderProductRepository.save(orderProduct);
+        }
+    }
+
+
+
     public  Long countTotal(){
         return orderRepository.count();
     }

@@ -61,24 +61,11 @@ public class AuthController {
     }
     @PostMapping("do-checkout")
     public  String doCheckout(HttpSession session, @RequestParam(name="address") String address){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentPrincipalName = authentication.getName();
-        User user = userService.getUseByEmail(currentPrincipalName);
-        Order order=new Order();
-        order.setUserId(user.getId());
+        double totalPrice =(double) session.getAttribute("TOTAL_PRICE");
         ArrayList<CartProduct> cartProducts = (ArrayList<CartProduct>) session.getAttribute("CART");
-        Collection<OrderProduct> orderProducts=new ArrayList<OrderProduct>();
-        for (CartProduct cartProduct: cartProducts) {
-            OrderProduct orderProduct=new OrderProduct();
-            orderProduct.setName(cartProduct.getName());
-            orderProduct.setPrice(cartProduct.getPrice());
-            orderProduct.setQuantity(cartProduct.getQuantity());
-            orderProduct.setProductId(cartProduct.getId());
-            orderProducts.add(orderProduct);
-        }
-        order.setOrderProducts(orderProducts);
-        order.setReceivedAddress(address);
-        orderService.save(order);
+        orderService.makeOrder(address,totalPrice,cartProducts);
+        ArrayList<CartProduct> newCartProducts=new ArrayList<CartProduct>();
+        session.setAttribute("CART",newCartProducts);
         return "redirect:/client/home";
     }
 

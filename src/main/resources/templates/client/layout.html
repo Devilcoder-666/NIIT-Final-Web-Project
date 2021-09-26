@@ -968,22 +968,7 @@
 
     }
 
-    function renderCartUI(resp) {
-        let subTotal = 0;
 
-        for (let i = 0; i < resp.length; i++) {
-            const product = resp[i];
-            renderCartProductUI(product);
-            subTotal = subTotal + (product.quantity * product.price);
-        }
-        let tax = subTotal * 10 / 100;
-        let total = subTotal + tax;
-        $('.subtotal').html('$' + subTotal);
-        $('.tax').html('$' + tax);
-        $('.total').html('$' + total);
-
-
-    }
 
     function loadCart() {
         $.ajax({
@@ -1004,6 +989,21 @@
     }
 
     loadCart()
+    function renderCartUI(resp) {
+        let subTotal = 0;
+        for (let i = 0; i < resp.length; i++) {
+            const product = resp[i];
+            renderCartProductUI(product);
+            subTotal = subTotal + (product.quantity * product.price);
+        }
+        let tax = subTotal * 10 / 100;
+        let total = subTotal + tax;
+        $('.subtotal').html('$' + subTotal);
+        $('.tax').html('$' + tax);
+        $('.total').html('$' + total);
+
+
+    }
 
     function renderCartProductUI(product) {
         $('.body-cart').append(
