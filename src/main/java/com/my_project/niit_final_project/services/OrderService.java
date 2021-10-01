@@ -1,9 +1,6 @@
 package com.my_project.niit_final_project.services;
 
-import com.my_project.niit_final_project.entities.CartProduct;
-import com.my_project.niit_final_project.entities.Order;
-import com.my_project.niit_final_project.entities.OrderProduct;
-import com.my_project.niit_final_project.entities.User;
+import com.my_project.niit_final_project.entities.*;
 import com.my_project.niit_final_project.repositories.OrderProductRepository;
 import com.my_project.niit_final_project.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,8 +79,8 @@ public class OrderService {
         return orderRepository.findById(id).get();
     }
 
-    public Page<Order> getPageUser(int page ){
-        Pageable pageable=  PageRequest.of(page,10);
+    public Page<Order> getPageOrder(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
         return orderRepository.findAll(pageable);
     }
     public  Iterable<Order> getAll(){
