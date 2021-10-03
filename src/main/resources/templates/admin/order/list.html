@@ -64,13 +64,21 @@
                             <td th:text="${order.getUserId()}"></td>
                             <td th:text="${order.getOrderDate()}"></td>
                             <td th:text="${order.getReceivedAddress()}"></td>
+                            <td th:text="'$ '+${order.getTotal()}">
 
-                            <td th:text="'$ '+${order.getTotal()}"></td>
-                            <td th:text="${order.getStatus()}"> </td>
+                            </td>
+                            <td >
+                                <div th:if="${order.getStatus==1}" class="badge badge-primary">New</div>
+                                <div th:if="${order.getStatus==2}" class="badge badge-dark">Confirmed</div>
+                                <div th:if="${order.getStatus==3}" class="badge badge-warning">Shipping</div>
+                                <div th:if="${order.getStatus==4}" class="badge badge-success">Completed</div>
+                                <div th:if="${order.getStatus==5}" class="badge badge-danger">Cancelled</div>
+
+
+                            </td>
                             <td>
                                 <a style="margin-top:5px;" class="btn btn-danger" th:href="@{/admin/order/show_detail(id=${order.getId()})}">See detail</a>
-                                <a class="btn btn-warning" th:href="@{/admin/order/edit(id=${order.getId()})}"
-                                   style="margin-top:5px;">Change status</a>
+
                             </td>
                         </tr>
 

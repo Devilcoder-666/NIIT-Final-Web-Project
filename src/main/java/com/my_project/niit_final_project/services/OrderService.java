@@ -35,6 +35,7 @@ public class OrderService {
         order.setUserId(user.getId());
         order.setTotal(total);
         order.setOrderDate(localDate);
+        order.setStatus(1);
         orderRepository.save(order);
         for (CartProduct cartProduct: cartProducts) {
             OrderProduct orderProduct=new OrderProduct();
