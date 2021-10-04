@@ -77,6 +77,11 @@ public class ProductService {
         Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
         return productRepository.findAll(pageable);
     }
+    public Page<Product> getPageSearchProduct(int page,int size,String keywords){
+        Pageable pageable=PageRequest.of(page, size);
+        return productRepository.searchProducts(keywords,pageable);
+    }
+
     public Page<Product> getPageProductByCategoryId(int page,int size,long id){
         Pageable pageable= PageRequest.of(page, size);
       Page<Product> pageProduct= productRepository.findByCategoryId(id,pageable);

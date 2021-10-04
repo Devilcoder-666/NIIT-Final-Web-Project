@@ -92,5 +92,35 @@ public class ClientProductController {
 
     }
 
+    @GetMapping("/search")
+    private String   getSearchResult(Model model, @RequestParam(name = "keywords", defaultValue = "null") String keywords,
+                                     @RequestParam(name = "page", defaultValue = "0") int page, @RequestParam(name = "activePage", defaultValue = "0") int activePage) {
+        try {int totalPage = productService.getPageSearchProduct(page, 10, keywords).getTotalPages();
+            //paging logic
+            if (page > totalPage + 1) {
+                Page<Product> listProductSearch = productService.getPageSearchProduct(activePage, 10, keywords);
+                Page<ProductType> listProductType = productTypeService.getPageProductType(0, 6);
+                model.addAttribute("listProductType", listProductType.iterator());
+                model.addAttribute("listProductSearch", listProductSearch);
+                model.addAttribute("activePage", activePage);
+
+
+            } else {
+                Page<Product> listProductSearch = productService.getPageSearchProduct(page, 10, keywords);
+                Page<ProductType> listProductType = productTypeService.getPageProductType(0, 6);
+                model.addAttribute("listProductType", listProductType.iterator());
+                model.addAttribute("listProductSearch", listProductSearch);
+                model.addAttribute("activePage", page);
+            }} catch (Exception e){
+            System.out.println(e);
+        }
+        finally{
+            model.addAttribute("keywords", keywords);
+            return "client/search_result";
+        }
+       }
+
+
+
 
 }
