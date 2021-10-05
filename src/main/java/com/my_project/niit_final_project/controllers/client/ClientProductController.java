@@ -1,7 +1,9 @@
 package com.my_project.niit_final_project.controllers.client;
+import com.my_project.niit_final_project.entities.Banner;
 import com.my_project.niit_final_project.entities.Category;
 import com.my_project.niit_final_project.entities.Product;
 import com.my_project.niit_final_project.entities.ProductType;
+import com.my_project.niit_final_project.services.BannerService;
 import com.my_project.niit_final_project.services.CategoryService;
 import com.my_project.niit_final_project.services.ProductService;
 import com.my_project.niit_final_project.services.ProductTypeService;
@@ -22,10 +24,21 @@ public class ClientProductController {
     private CategoryService categoryService;
     @Autowired
     private ProductTypeService productTypeService;
-
+    @Autowired
+    private BannerService bannerService;
     @GetMapping("/home")
     private String getHome(Model model) {
         try {
+            Page<Banner> listBanner=bannerService.getPageBanner(0,3);
+            if(listBanner.getTotalElements()>=3){
+            Banner banner_1=listBanner.getContent().get(0);
+            Banner banner_2=listBanner.getContent().get(1);
+            Banner banner_3=listBanner.getContent().get(2);
+            model.addAttribute("banner_1", banner_1);
+            model.addAttribute("banner_2", banner_2);
+            model.addAttribute("banner_3", banner_3);
+
+            }
             Page<Product> listNewProduct = productService.getPageNewProduct(0, 8);
             Page<Product> listSaleProduct = productService.getPageSaleProduct(0, 8);
             Page<ProductType> listProductType = productTypeService.getPageProductType(0, 6);

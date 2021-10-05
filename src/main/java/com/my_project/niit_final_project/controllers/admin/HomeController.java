@@ -40,10 +40,4 @@ public class HomeController {
            model.addAttribute("total_category",totalCategory);
            return "/admin/home";
        }
-
-
-
-
-
-
 }

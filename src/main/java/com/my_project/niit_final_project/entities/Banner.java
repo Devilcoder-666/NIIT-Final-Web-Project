@@ -15,7 +15,7 @@ public class Banner {
     String name;
     @Column(name = "picture")
     String picture;
-    @Column(name="order")
+    @Column(name="status")
     int order;
 
 }
