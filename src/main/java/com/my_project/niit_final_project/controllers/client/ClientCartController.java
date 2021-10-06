@@ -103,7 +103,16 @@ public class ClientCartController {
         session.setAttribute("CART", tmpCartProducts);
         return ResponseEntity.ok(tmpCartProducts);
     }
+    @GetMapping("/get-cart")
+    @ResponseBody
+    public ResponseEntity<?> getCart(HttpSession session){
+        if (session.getAttribute("CART")==null){
+            return ResponseEntity.ok(new ArrayList<CartProduct>());
+        }
+        ArrayList<CartProduct> cartProducts = (ArrayList<CartProduct>) session.getAttribute("CART");
+        return ResponseEntity.ok(cartProducts);
 
+    }
     @PostMapping("/change-quantity")
      @ResponseBody
     public ResponseEntity<?> changedQuantity(@RequestParam(name="id") long id,@RequestParam(name="step") int step , HttpSession session){
@@ -126,16 +135,7 @@ public class ClientCartController {
         return ResponseEntity.ok(cartProducts);
     }
 
-    @GetMapping("/get-cart")
-    @ResponseBody
-    public ResponseEntity<?> getCart(HttpSession session){
-        if (session.getAttribute("CART")==null){
-            return ResponseEntity.ok(new ArrayList<CartProduct>());
-        }
-        ArrayList<CartProduct> cartProducts = (ArrayList<CartProduct>) session.getAttribute("CART");
-        return ResponseEntity.ok(cartProducts);
 
-    }
 
 @GetMapping("/page")
     public String getPage() {

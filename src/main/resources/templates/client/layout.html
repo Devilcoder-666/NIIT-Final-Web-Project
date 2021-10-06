@@ -950,7 +950,9 @@
                 step: step
             },
             success: function (resp) {
-
+                console.log(resp);
+                $('.f-cart__table').empty();
+                renderCartBill(resp);
                 let quantity = parseInt($(`tr[data-id="${id}"] .input-counter .input-counter__text`).val());
                 quantity += step;
                 if (quantity == 0) {
@@ -960,8 +962,10 @@
                     $(`tr[data-id="${id}"] .input-counter .input-counter__text`).val(quantity);
                     $('.mini-product-container').empty();
                     loadMiniCart();
-                }
 
+                }
+                $('.f-cart__table').empty();
+                loadBill();
 
             }
         })
@@ -978,17 +982,41 @@
             success: function (resp) {
 
                 renderCartUI(resp);
-
             },
             error: function (err) {
                 console.log(err);
             }
 
+        })
+    }
+    loadCart()
+    function loadBill(){
+        $.ajax({
+            url: "/client/cart/get-cart",
+            dataType: 'json',
+            method: 'get',
+            success: function (resp) {
+
+                renderCartBillUI(resp);
+            },
+            error: function (err) {
+                console.log(err);
+            }
 
         })
     }
+    loadBill()
+    function renderCartBillUI(resp){
 
-    loadCart()
+        let subTotal = 0;
+        for (let i = 0; i < resp.length; i++) {
+            const product = resp[i];
+            subTotal = subTotal + (product.quantity * product.price);
+        }
+        let tax = subTotal * 10 / 100;
+        let total = subTotal + tax;
+        renderCartBill(total,subTotal,tax)
+    }
     function renderCartUI(resp) {
         let subTotal = 0;
         for (let i = 0; i < resp.length; i++) {
@@ -998,10 +1026,6 @@
         }
         let tax = subTotal * 10 / 100;
         let total = subTotal + tax;
-        $('.subtotal').html('$' + subTotal);
-        $('.tax').html('$' + tax);
-        $('.total').html('$' + total);
-
 
     }
 
@@ -1049,8 +1073,30 @@
              </td>
             </tr>`)
     }
+    function renderCartBill(total,subtotal,tax) {
+
+        $('.f-cart__table').append(
+            ` <tbody>
+                      <tr>
+                        <td>SUBTOTAL</td>
+                        <td class="subtotal">$${subtotal}</td>
+                      </tr>
+                      <tr>
+                        <td>TAX (10%)</td>
+                        <td class="tax" >$${tax}</td>
+                      </tr>
+
+                      <tr>
+                        <td>GRAND TOTAL</td>
+                        <td class="total">$${total}</td>
+                      </tr>
+                      </tbody> `)
+    }
 
     /* END CART PAGE */
+
+
+
     /* START ORDER PAGE */
     function renderOrderProductUI(product) {
         $('.o-summary__item-wrap').append(`
