@@ -19,7 +19,7 @@
                                 <a th:href="@{/client/home}">Home</a></li>
                             <li class="has-separator">
 
-                                <a th:href="@{/client/type/product}" th:text="${product.getCategory().getProductType().getName()}" > Electronics</a></li>
+                                <a th:href="@{/client/type/product(id=${product.getCategory().getProductType().getId()})}" th:text="${product.getCategory().getProductType().getName()}" > Electronics</a></li>
 
                             <li class="is-marked">
 

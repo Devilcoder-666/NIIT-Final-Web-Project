@@ -99,7 +99,7 @@
 
 
 
-            <nav aria-label="Page navigation example" th:if="${listBannerPage.getTotalPages()>=0}">
+            <nav aria-label="Page navigation example" th:if="${listBannerPage.getTotalPages()>1}">
                 <ul class="pagination">
                     <li class="page-item" ><a class="page-link" th:href="@{/admin/banner/list(page=${activePage-1})}">Previous</a></li>
                     <li class="page-item" th:each="pageNumber:${#numbers.sequence(0, listBannerPage.getTotalPages()-1)}"

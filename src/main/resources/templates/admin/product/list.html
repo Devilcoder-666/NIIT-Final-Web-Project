@@ -86,7 +86,7 @@
                     </div>
 
                     <!-- /.card-body -->
-                    <div th:if="${listProductPage.getTotalPages()>1}" class="card-footer clearfix">
+          <!--          <div th:if="${listProductPage.getTotalPages()>1}" class="card-footer clearfix">
                         <ul class="pagination pagination-sm m-0 float-right">
                             <li th:each="pageNumber:${#numbers.sequence(0, listProductPage.getTotalPages()-1)}"
                                 th:attr="class=${listProductPage.getActivePage()==pageNumber ? 'active page-item' : 'page-item'}">
@@ -94,13 +94,13 @@
                                    th:text="${pageNumber}"></a>
                             </li>
                         </ul>
-                    </div>
+                    </div>-->
                 </div>
             </div>
 
 
 
-            <nav aria-label="Page navigation example" th:if="${listProductPage.getTotalPages()>=0}">
+            <nav aria-label="Page navigation example" th:if="${listProductPage.getTotalPages()>1}">
                 <ul class="pagination">
                     <li class="page-item" ><a class="page-link" th:href="@{/admin/product/list(page=${activePage-1})}">Previous</a></li>
                     <li class="page-item" th:each="pageNumber:${#numbers.sequence(0, listProductPage.getTotalPages()-1)}"

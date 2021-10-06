@@ -169,7 +169,7 @@
                                 <li class="has-dropdown" th:if="${type.getCategories().size()>0}"
                                     th:each="type:${listProductType}">
 
-                                    <a th:text="${type.getName()}"> <i class="fas fa-angle-down u-s-m-l-6"></i> </a>
+                                    <a th:text="${type.getName()}" th:href="@{/client/type/product(id=${type.getId()})}"> <i class="fas fa-angle-down u-s-m-l-6"></i> </a>
 
                                     <!--====== Dropdown ======-->
 

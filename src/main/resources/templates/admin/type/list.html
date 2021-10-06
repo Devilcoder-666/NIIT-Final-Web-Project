@@ -93,7 +93,7 @@
                 </ul>
             </div>-->
         <!--  new paging-->
-        <nav aria-label="Page navigation example" th:if="${listProductTypePage.getTotalPages()>=0}">
+        <nav aria-label="Page navigation example" th:if="${listProductTypePage.getTotalPages()>1}">
             <ul class="pagination">
                 <li class="page-item" ><a class="page-link" th:href="@{/admin/type/list(page=${activePage-1})}">Previous</a></li>
                 <li class="page-item" th:each="pageNumber:${#numbers.sequence(0, listProductTypePage.getTotalPages()-1)}"
