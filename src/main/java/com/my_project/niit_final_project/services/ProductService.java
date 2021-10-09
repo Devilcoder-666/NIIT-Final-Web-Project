@@ -1,7 +1,9 @@
 package com.my_project.niit_final_project.services;
 
 
+import com.my_project.niit_final_project.entities.Category;
 import com.my_project.niit_final_project.entities.Product;
+import com.my_project.niit_final_project.entities.ProductType;
 import com.my_project.niit_final_project.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,7 +14,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 @Service
 public class ProductService {
@@ -20,6 +26,8 @@ public class ProductService {
     private ProductRepository productRepository;
     @Autowired
     private UploadService uploadService;
+    @Autowired
+    private ProductTypeService productTypeService;
 
 
 
@@ -67,7 +75,21 @@ public class ProductService {
         Pageable pageable = PageRequest.of(page, size);
         return productRepository.findAll(pageable);
     }
+   public ArrayList<Product> getSuggestProductList(){
+        ArrayList<Product> suggestProductList=new ArrayList<Product>();
+        for(ProductType productType   : productTypeService.getAll()){
+            for(Category category : productType.getCategories()){
 
+                            int rnd = new Random().nextInt(category.getProducts().size());
+                           List<Product> demoListProduct= new ArrayList<Product>();
+                           for(Product product : category.getProducts()){
+                               demoListProduct.add(product);
+                           }
+                           suggestProductList.add(demoListProduct.get(rnd));
+            }
+        }
+        return suggestProductList;
+    }
     public Page<Product> getPageSaleProduct(int page,int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("discount").descending());
         return productRepository.findAll(pageable);
@@ -77,6 +99,7 @@ public class ProductService {
         Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
         return productRepository.findAll(pageable);
     }
+
     public Page<Product> getPageSearchProduct(int page,int size,String keywords){
         Pageable pageable=PageRequest.of(page, size);
         return productRepository.searchProducts(keywords,pageable);

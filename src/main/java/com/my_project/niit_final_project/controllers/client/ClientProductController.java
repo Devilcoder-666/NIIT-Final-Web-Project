@@ -33,6 +33,8 @@ public class ClientProductController {
     private BannerService bannerService;
     @GetMapping("/home")
     private String getHome(Model model) {
+          ArrayList<Product> listSuggestProduct=productService.getSuggestProductList();
+           model.addAttribute("listSuggestProduct",listSuggestProduct.iterator());
         try {
             Page<Banner> listBanner=bannerService.getPageBanner(0,3);
             if(listBanner.getTotalElements()>=3){
@@ -52,10 +54,13 @@ public class ClientProductController {
             model.addAttribute("listSaleProduct", listSaleProduct.iterator());
             model.addAttribute("listProductType", listProductType.iterator());
 
+
         } catch (ArithmeticException e) {
             //In ra màn hình tên ngoại lệ
             System.out.println(e);
-        } finally
+        } catch (Exception e){
+            System.out.println(e);
+        }finally
         { return "/client/home"; }
 
 
