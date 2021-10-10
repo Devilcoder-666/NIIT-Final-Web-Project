@@ -79,7 +79,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN")
                 .and().authorizeRequests().antMatchers("/checkout").hasAnyRole("ADMIN","USER")
                 .and().authorizeRequests().antMatchers("/","/client/**","/client/cart/**","/css/*", "/js/*").permitAll()
-                .and().formLogin().loginPage("/login").and().logout().logoutUrl("/logout")
+                .and().formLogin().loginPage("/login").defaultSuccessUrl("/client/home/").and().logout().logoutUrl("/logout")
                 .and().exceptionHandling().accessDeniedPage("/access_deny");
     }
 

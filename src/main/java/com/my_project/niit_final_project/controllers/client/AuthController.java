@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.servlet.http.HttpSession;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -62,8 +64,10 @@ public class AuthController {
     @PostMapping("do-checkout")
     public  String doCheckout(HttpSession session, @RequestParam(name="address") String address){
         double totalPrice =(double) session.getAttribute("TOTAL_PRICE");
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.setRoundingMode(RoundingMode.HALF_DOWN);
         ArrayList<CartProduct> cartProducts = (ArrayList<CartProduct>) session.getAttribute("CART");
-        orderService.makeOrder(address,totalPrice,cartProducts);
+        orderService.makeOrder(address,totalPrice*1.1,cartProducts);
         ArrayList<CartProduct> newCartProducts=new ArrayList<CartProduct>();
         session.setAttribute("CART",newCartProducts);
         return "redirect:/client/home";

@@ -91,11 +91,13 @@ public class OrderController implements ICRUD<Order> {
         Collection<OrderProduct> orderProducts=order.getOrderProducts();
          double subtotal=order.getTotal()/1.1;
         double tax=subtotal*0.1;
+        double total=order.getTotal();
         DecimalFormat df = new DecimalFormat("#.##");
         df.setRoundingMode(RoundingMode.HALF_DOWN);
         model.addAttribute("order", order);
         model.addAttribute("subtotal",df.format(subtotal));
         model.addAttribute("tax",df.format(tax));
+        model.addAttribute("total",df.format(total));
         model.addAttribute("user", user);
         model.addAttribute("orderProducts",orderProducts);
         return "admin/order/detail";

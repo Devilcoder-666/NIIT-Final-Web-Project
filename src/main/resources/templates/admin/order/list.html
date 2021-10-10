@@ -64,8 +64,8 @@
                             <td th:text="${order.getUserId()}"></td>
                             <td th:text="${order.getOrderDate()}"></td>
                             <td th:text="${order.getReceivedAddress()}"></td>
-                            <td th:text="'$ '+${order.getTotal()}">
-
+                            <td >
+                                $ <span th:text="${#numbers.formatDecimal(order.getTotal(), 3,2,'COMMA')}"></span>
                             </td>
                             <td >
                                 <div th:if="${order.getStatus==1}" class="badge badge-primary">New</div>

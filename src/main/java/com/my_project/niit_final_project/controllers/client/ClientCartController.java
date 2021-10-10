@@ -51,7 +51,7 @@ public class ClientCartController {
             CartProduct cartProduct=new CartProduct();
             cartProduct.setId(id);
             cartProduct.setName(product.getName());
-            cartProduct.setPrice(product.getPrice());
+            cartProduct.setPrice(product.getPrice()-product.getDiscount());
             cartProduct.setPicture(product.getPicture());
             cartProduct.setQuantity(quantity);
             cartProducts.add(cartProduct);
@@ -73,7 +73,7 @@ public class ClientCartController {
                 Product product =productService.getProductById(id);
                 cartProduct.setId(id);
                 cartProduct.setName(product.getName());
-                cartProduct.setPrice(product.getPrice());
+                cartProduct.setPrice(product.getPrice()-product.getDiscount());
                 cartProduct.setPicture(product.getPicture());
                 cartProduct.setQuantity(quantity);
                 cartProducts.add(cartProduct);
